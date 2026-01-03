@@ -26,3 +26,39 @@ body{
 	max-width: 1600px;
 	margin: 0 auto;
 }
+
+
+nav {
+  position: fixed;
+  max-width: 1600px;
+  margin: 0 auto;
+  margin-bottom: 60px;
+  padding: 0 20px;
+  top: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 1000;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+nav li {
+  height: 50px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+}
+
+
+@media screen and (max-width: 900px) {
+  nav ul {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+

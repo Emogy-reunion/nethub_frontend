@@ -1,0 +1,134 @@
+/* WhyChooseUs.module.css - REPLACE ENTIRE FILE WITH THIS */
+
+/* Page / section wrapper */
+.wrap {
+  padding: 3rem 1rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfcfe 100%);
+  box-sizing: border-box;
+}
+
+/* Keep content centered and limit site width to 1600px */
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* Heading + lead */
+.heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #6b21a8;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.lead {
+  color: #6b7280;
+  text-align: center;
+  max-width: 900px;
+  margin: 0.25rem auto 1.75rem auto;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* GRID: small = 1 column, medium = 2 columns, large = 4 columns */
+/* This grid fills the available width; cards grow to 1fr each */
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Medium screens: 2 columns (tablet-ish) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Large screens: 4 columns (desktop) */
+/* Also cap layout width to 1600px via .container above */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+/* CARD - stretch to full width of the grid cell */
+.card {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  box-sizing: border-box;
+}
+
+/* Hover lift */
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.09);
+}
+
+/* Icon container */
+.iconWrap {
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(107,33,168,0.08), rgba(37,99,235,0.06));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b21a8;
+  flex-shrink: 0;
+}
+
+/* Content area grows and fills remaining space */
+.content {
+  flex: 1 1 auto;
+  min-width: 0; /* important so text truncates/wraps correctly in grid */
+}
+
+
+.cardTitle {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: #6b21a8;
+}
+
+.cardDesc {
+  margin: 0.35rem 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+/* Small visual tweaks for very narrow devices */
+@media (max-width: 420px) {
+  .card {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+  .iconWrap {
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+}
+

@@ -34,6 +34,7 @@ export const metadata = {
         locale: "en_US",
         type: "website",
     },
+
     twitter: {
         card: "summary_large_image",
         title: "Nethub Electronics",
@@ -41,6 +42,7 @@ export const metadata = {
             "Your one-stop destination for computers, networking devices, and smart tech.",
         images: ["/og-image.png"],
     },
+
     icons: {
         icon: "/favicon.ico",
     },
