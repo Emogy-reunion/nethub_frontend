@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 
-const BACKEND_URL = process.env.BACKEND_URL
+const BACKEND_URL = process.env.BACKEND_URL;
 
 export async function middleware(req) {
 	const { pathname } = req.nextUrl;
@@ -14,7 +14,7 @@ export async function middleware(req) {
 		return NextResponse.next();
 	}
 
-	// check is user is logged in
+	// check is user is logged
 	let authResponse = await fetch(`${BACKEND_URL}/api/is_logged_in`, {
 		headers: { cookie }
 	});
@@ -46,7 +46,7 @@ export async function middleware(req) {
 
 	//role enforcement
 	if (isAdminRoute && data.role != 'admin') {
-		return NextResponse(newUrl('/', req.url));
+		return NextResponse.redirect(newUrl('/', req.url));
 	}
 
 	// everything is okay: allow
