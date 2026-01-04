@@ -33,11 +33,17 @@
 /* Input group with icon */
 .inputGroup {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border: 1px solid #ccc;
   padding: 10px 12px;
   border-radius: 10px;
   transition: border 0.2s;
+}
+
+.inputRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .inputGroup:focus-within {
@@ -119,3 +125,26 @@
     font-size: 0.95rem;
   }
 }
+
+
+.error-message {
+    	color: red;
+    	font-size: 12px;
+    	margin-top: 5px;
+}
+
+
+.error {
+  	background-color: #ffe0e0;
+  	color: #b20000;
+  	border: 1px solid #ffcccc;
+	padding: 10px;
+}
+
+.success-message {
+  	background-color: #e0ffe0;
+  	color: #006600;
+  	border: 1px solid #b3ffb3;
+	padding: 10px;
+}
+

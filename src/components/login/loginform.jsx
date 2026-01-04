@@ -17,6 +17,12 @@ export default function LoginForm() {
 	const [globalError, setGlobalError] = useState(null);
 	const router = useRouter();
 
+	const FIELD_STEP_MAP = {
+		email: 1,
+		password: 2,
+	};
+
+
   	const handleChange = (e) => {
     		setFormData((prev) => ({
       			...prev,
@@ -50,10 +56,12 @@ export default function LoginForm() {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'X-CSRF-Token': csrf_token,
 				},
 				credentials: 'include',
-				body: JSON.stringify(formData)
+				body: JSON.stringify({
+					...formData,
+					csrf_token
+				})
 			});
 
 			const data = await response.json();
@@ -62,12 +70,20 @@ export default function LoginForm() {
 
 				if (data.errors) {
 
+					let targetStep = step;
+
 					const formattedErrors = Object.keys(data.errors).reduce((acc, key) => {
 						acc[key] =  data.errors[key].join(', ');
 						return acc;
+
+						const fieldStep = FIELD_STEP_MAP[key];
+        					if (fieldStep && fieldStep < targetStep) {
+            						targetStep = fieldStep;
+        					}
 					}, {});
 
 					setFormErrors(formattedErrors);
+					setStep(targetStep);
 
 					setTimeout(() => {
 						setFormErrors({});
@@ -99,9 +115,7 @@ export default function LoginForm() {
 			}
 		} catch(error) { 
 			alert('Network error. Please try again.');
-		} finally {
-			setStep(1);
-		}
+		} 
 	};
 
 
@@ -123,34 +137,38 @@ export default function LoginForm() {
         			{/* Step 1: Email */}
         			{step === 1 && (
           				<div className={styles.inputGroup}>
-            					<Mail className={styles.icon} />
-            						<input
-              							type="email"
-              							name="email"
-              							placeholder="Email"
-              							value={formData.email}
-              							onChange={handleChange}
-              							className={styles.input}
-            						/>
+						<div className={styles.inputRow}>
+            						<Mail className={styles.icon} />
+            							<input
+              								type="email"
+              								name="email"
+              								placeholder="Email"
+              								value={formData.email}
+              								onChange={handleChange}
+              								className={styles.input}
+            							/>
+						</div>
 
-							{formErrors.email && (
-								<p className={styles['error-message']}>{formErrors.email}</p>
-							)}
+						{formErrors.email && (
+							<p className={styles['error-message']}>{formErrors.email}</p>
+						)}
           				</div>
         			)}
 
        				{/* Step 2: Password */}
 		 		{step === 2 && (
           				<div className={styles.inputGroup}>
-            					<Lock className={styles.icon} />
-            					<input
-              						type="password"
-      						        name="password"
-           						placeholder="Password"
-              						value={formData.password}
-              						onChange={handleChange}
-              						className={styles.input}
-            					/>
+						<div className={styles.inputRow}>
+            						<Lock className={styles.icon} />
+            						<input
+              							type="password"
+      						        	name="password"
+           							placeholder="Password"
+              							value={formData.password}
+              							onChange={handleChange}
+              							className={styles.input}
+            						/>
+						</div>
 						{formErrors.password && (
 							<p className={styles['error-message']}>{formErrors.password}</p>
                                                  )}
