@@ -4,65 +4,81 @@ import { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
 import styles from '@/styles/login/TwoStepLogin.module.css';
 
-export default function TwoStepLogin() {
-	const [step, setStep] = useState(1);
+export default function LoginForm() {
 
-	return (
-		<div className={styles.container}>
-      			<div className={styles.card}>
-        			<h2 className={styles.heading}>Welcome to Nethub Electronics</h2>
+	const [step, setStep] = useState(1); // Current step
+  	const [formData, setFormData] = useState({
+    		email: '',
+    		password: '',
+  	});
 
-        			{/* Email Step */}
-        			<div className={`${styles.step} ${step === 1 ? styles.active : styles.inactive}`}>
-          				<label htmlFor="email" className={styles.label}>
-            					<Mail className={styles.icon} /> Email
-          				</label>
-          				
-					<input
-            					type="email"
-            					id="email"
-            					placeholder="Enter your email"
-            					className={styles.input}
-          				/>
-          				
-					<button
-            					type="button"
-            					className={styles.button}
-            					onClick={() => setStep(2)}
-          				>
-            					Next
+  	const handleChange = (e) => {
+    		setFormData((prev) => ({
+      			...prev,
+			[e.target.name]: e.target.value,
+		}));
+  	};
+
+  	const handleNext = (e) => {
+		e.preventDefault();
+		setStep((prev) => prev + 1);
+	};
+
+
+  	const handleBack = () => {
+		setStep((prev) => (prev > 1 ? prev - 1 : prev));
+	};
+
+ 	 return (
+    		<div className={styles.container}>
+      			<form
+        			className={styles.form}
+        			onSubmit={step === 2 ? handleSubmit : handleNext}
+      			>
+        			<h2 className={styles.title}>Welcome to Nethub Electronixs</h2>
+
+        			{/* Step 1: Email */}
+        			{step === 1 && (
+          				<div className={styles.inputGroup}>
+            					<Mail className={styles.icon} />
+            						<input
+              							type="email"
+              							name="email"
+              							placeholder="Email"
+              							value={formData.email}
+              							onChange={handleChange}
+              							className={styles.input}
+            						/>
+          				</div>
+        			)}
+
+       				{/* Step 2: Password */}
+		 		{step === 2 && (
+          				<div className={styles.inputGroup}>
+            					<Lock className={styles.icon} />
+            					<input
+              						type="password"
+      						        name="password"
+           						placeholder="Password"
+              						value={formData.password}
+              						onChange={handleChange}
+              						className={styles.input}
+            					/>
+          				</div>
+        			)}
+
+        			<div className={styles.buttons}>
+          				{step > 1 && (
+            					<button type="button" className={styles.backButton} onClick={handleBack}>
+             						 Back
+            					</button>
+          				)}
+
+          				<button type="submit" className={styles.button}>
+            					{step === 2 ? 'Login' : 'Next'}
           				</button>
         			</div>
-
-        			{/* Password Step */}
-        			<div className={`${styles.step} ${step === 2 ? styles.active : styles.inactive}`}>
-          				<label htmlFor="password" className={styles.label}>
-            					<Lock className={styles.icon} /> Password
-          				</label>
-          				
-					<input
-            					type="password"
-            					id="password"
-            					placeholder="Enter your password"
-            					className={styles.input}
-          				/>
-          				
-					<div className={styles.buttons}>
-            					<button
-              						type="button"
-              						className={styles.buttonSecondary}
-              						onClick={() => setStep(1)}
-            					>
-              						Back
-            					</button>
-            					
-						<button type="submit" className={styles.button}>
-              						Login
-            					</button>
-          				</div>
-        			</div>
-      			</div>
+      			</form>
     		</div>
-	);
+  	);
 }
-
