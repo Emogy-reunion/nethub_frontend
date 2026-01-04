@@ -35,7 +35,7 @@ export default function LoginForm() {
         			className={styles.form}
         			onSubmit={step === 2 ? handleSubmit : handleNext}
       			>
-        			<h2 className={styles.title}>Welcome to Nethub Electronixs</h2>
+        			<h2 className={styles.title}>Welcome to Nethub Electronics</h2>
 
         			{/* Step 1: Email */}
         			{step === 1 && (
