@@ -33,7 +33,7 @@ export default function LoginForm() {
     		<div className={styles.container}>
       			<form
         			className={styles.form}
-        			onSubmit={step === 2 ? handleSubmit : handleNext}
+        			onSubmit={step === 2 ? handleBack : handleNext}
       			>
         			<h2 className={styles.title}>Welcome to Nethub Electronics</h2>
 

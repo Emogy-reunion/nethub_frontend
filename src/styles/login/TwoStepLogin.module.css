@@ -27,6 +27,8 @@
   gap: 25px;
   width: 450px;
   border: 3px solid #6a0dad;
+  padding: 30px;
+  border-radius: 5px;
 }
 
 /* Input group with icon */
