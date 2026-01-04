@@ -28,7 +28,7 @@ export async function middleware(req) {
 
 		// if refresh fails -> redirect to login
 		if (!refreshRes.ok) {
-			return NextResponse.redirect(new URL('/login', req.url));
+			return NextResponse.redirect(new URL('/guest/login', req.url));
 		}
 
 		// retry authentication after refreshing
@@ -38,7 +38,7 @@ export async function middleware(req) {
 	}
 
 	if (!authResponse.ok) {
-		return NextResponse.redirect(new URL('/login', req.url));
+		return NextResponse.redirect(new URL('/guest/login', req.url));
 	}
 
 	const data = await authResponse.json()
