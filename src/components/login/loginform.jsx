@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from 'react';
-import { Mail, Lock } from 'lucide-react'; // Lucide icons
+import { Mail, Lock } from 'lucide-react';
 import styles from '@/styles/login/TwoStepLogin.module.css';
 
 export default function TwoStepLogin() {
