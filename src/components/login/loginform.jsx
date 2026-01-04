@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Mail, Lock } from 'lucide-react';
-import useRouter from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import styles from '@/styles/login/TwoStepLogin.module.css';
 
 export default function LoginForm() {
@@ -34,17 +34,17 @@ export default function LoginForm() {
 		setStep((prev) => (prev > 1 ? prev - 1 : prev));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 
 		e.preventDefault();
 
-		const [formErrors, setFormErrors] = useState({});
-        	const [successMessage, setSuccessMessage] = useState(null);
-        	const [globalError, setGlobalError] = useState(null);
+		setFormErrors({});
+		setSuccessMessage(null);
+		setGlobalError(null);
 
 		try {
-			const csrfRes = await fetch('/get_csrf_token', { method: 'GET' });
-			const { csrf_token } = csrfRes.json();
+			const csrfRes = await fetch('/api/get_csrf_token', { method: 'GET' });
+			const { csrf_token } = await csrfRes.json();
 
 			const response = await fetch('/api/login', {
 				method: 'POST',
@@ -53,7 +53,7 @@ export default function LoginForm() {
 					'X-CSRF-Token': csrf_token,
 				},
 				credentials: 'include',
-				body: JSON.Stringify(formData)
+				body: JSON.stringify(formData)
 			});
 
 			const data = await response.json();
