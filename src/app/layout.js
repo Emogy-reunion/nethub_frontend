@@ -1,6 +1,5 @@
 import "./globals.css";
 import { AuthProvider } from '@/context/authContext';
-import ClientWrapper from '@/context/ClientWrapper';
 
 export const metadata = {
     title: {
@@ -54,7 +53,7 @@ export default function RootLayout({ children }) {
     return (
         <html lang="en">
             <body className="wrapper">
-		<ClientWrapper>{children}</ClientWrapper>
+		<AuthProvider>{children}</AuthProvider>
 	    </body>
         </html>
     );
