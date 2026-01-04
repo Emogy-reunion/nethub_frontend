@@ -7,7 +7,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',                // any request starting with /api
-        destination: 'http://127.0.0.1:5000/:path*', // goes to Flask
+        destination: 'http://127.0.0.1:5000/api/:path*', // goes to Flask
       },
     ];
   },
