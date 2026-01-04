@@ -46,7 +46,7 @@ export async function middleware(req) {
 
 	//role enforcement
 	if (isAdminRoute && data.role != 'admin') {
-		return NextResponse.redirect(newUrl('/', req.url));
+		return NextResponse.redirect(new URL('/', req.url));
 	}
 
 	// everything is okay: allow
