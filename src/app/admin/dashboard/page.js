@@ -5,8 +5,9 @@ import ProductSlider from "@/components/heroSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import AboutSection from "@/components/AboutUs";
 import AdminFooter from "@/components/AdminFooter";
+import withAdminAuth from '@/hoc/withAdmin';
 
-export default  function Page () {
+const AdminDashBoard = () => {
         return (
                 <main>
                         <AdminNavBar />
@@ -18,3 +19,5 @@ export default  function Page () {
                 </main>
         );
 };
+
+export default withAdminAuth(AdminDashboard);
