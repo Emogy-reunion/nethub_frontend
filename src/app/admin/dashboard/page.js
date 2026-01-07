@@ -1,5 +1,3 @@
-'use client';
-
 import React from "react";
 import AdminNavBar from '@/components/AdminNavbar';
 import HeroText from "@/components/heroText";
@@ -22,4 +20,4 @@ const AdminDashboard = () => {
         );
 };
 
-export default withAdminAuth(AdminDashboard);
+export default AdminDashboard;
