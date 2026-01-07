@@ -5,7 +5,6 @@ import ProductSlider from "@/components/heroSlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import AboutSection from "@/components/AboutUs";
 import AdminFooter from "@/components/AdminFooter";
-import withAdminAuth from '@/hoc/withAdmin';
 
 const AdminDashboard = () => {
         return (
