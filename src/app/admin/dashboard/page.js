@@ -7,7 +7,7 @@ import AboutSection from "@/components/AboutUs";
 import AdminFooter from "@/components/AdminFooter";
 import withAdminAuth from '@/hoc/withAdmin';
 
-const AdminDashBoard = () => {
+const AdminDashboard = () => {
         return (
                 <main>
                         <AdminNavBar />
