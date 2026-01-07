@@ -1,3 +1,5 @@
+'use client';
+
 import React from "react";
 import AdminNavBar from '@/components/AdminNavbar';
 import HeroText from "@/components/heroText";
