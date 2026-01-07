@@ -1,7 +1,10 @@
+'use client';
+
 import React from "react";
 import HeroAbout from "@/components/about/heroAbout";
 import CTASection from "@/components/about/CTASection";
 import ValuesSection from "@/components/about/ValuesSection";
+import withAdminAuth from "@/components/hoc/withAdmin';
 
 import AdminNavBar from '@/components/AdminNavbar';
 import AdminFooter from "@/components/AdminFooter";
@@ -24,4 +27,4 @@ const AdminAboutPage = () => {
 };
 
 
-export default AdminAboutPage;
+export default withAdminAuth(AdminAboutPage);
