@@ -1,0 +1,167 @@
+.form {
+  background: #ffffff;
+  max-width: 520px;
+  margin: 2rem auto;
+  margin-top: 70px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  font-family: system-ui, sans-serif;
+}
+
+.title {
+  color: #6b2cff; /* Purple brand */
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.message {
+  text-align: center;
+  color: #6b2cff;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.group { 
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: border 0.2s;
+  }
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.icon {
+  color: #6b2cff;
+}
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  color: #000;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: #6b2cff;
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.form select {
+  width: 100%;
+  padding: 0.75rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  background: #ffffff; /* white background */
+  color: #000000; /* black text */
+  appearance: none; /* remove default arrow styling */
+  cursor: pointer;
+}
+
+.form select:focus {
+  outline: none;
+  border-color: #6b2cff; /* purple brand color on focus */
+  box-shadow: 0 0 0 2px rgba(107, 44, 255, 0.2);
+}
+
+/* Optional: wrap select in inputRow to align with icon */
+.inputRow select {
+  flex: 1;
+}
+
+.upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.2rem;
+  border: 2px dashed #6b2cff;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #6b2cff;
+  font-weight: 500;
+}
+
+.info {
+  font-size: 0.9rem;
+  color: #000;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.button {
+  background: #6b2cff;
+  color: #fff;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.button:hover {
+  background: #5a22d6;
+}
+
+.backButton {
+  background: transparent;
+  color: #6b2cff;
+  border: 1px solid #6b2cff;
+  padding: 0.7rem 1.4rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.backButton:hover {
+  background: #f2ecff;
+}
+
+.error-message {
+    	color: red;
+    	font-size: 12px;
+    	margin-top: 5px;
+}
+
+
+.error {
+  	background-color: #ffe0e0;
+  	color: #b20000;
+  	border: 1px solid #ffcccc;
+	padding: 10px;
+}
+
+.success-message {
+  	background-color: #e0ffe0;
+  	color: #006600;
+  	border: 1px solid #b3ffb3;
+	padding: 10px;
+}
