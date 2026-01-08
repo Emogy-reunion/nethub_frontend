@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import ProductsComponent from '@/app/admin/products/productsComponent';
+import ProductsComponent from '@/app/admin/products/network/networkComponent';
 
 
 const BACKEND_URL = process.env.BACKEND_URL
@@ -10,7 +10,7 @@ const  AdminProductsPage = async () => {
 	try {
 		const cookie = cookies().toString();
 		
-		const response = await fetch(`${BACKEND_URL}/api/get_product_previews`, {
+		const response = await fetch(`${BACKEND_URL}/api/get_product_previews?category:network-devices`, {
 			method: 'GET',
 			headers: { cookie },
 			cache: 'no-store',

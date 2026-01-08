@@ -53,7 +53,7 @@ const AdminNavBar = () => {
             <span className={styles["travel-link"]}>Products</span>
             <ul className={styles["dropdown-menu"]}>
               <li>
-                <Link href="#" className={styles["travel-link"]}>
+                <Link href="/admin/products/network" className={styles["travel-link"]}>
                   Network Devices
                 </Link>
               </li>

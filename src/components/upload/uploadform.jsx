@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Image, Package, Tag, DollarSign } from "lucide-react";
+import { Image, Package, Tag, DollarSign, Percent } from "lucide-react";
 import styles from "@/styles/upload/upload.module.css";
 import { useRouter } from 'next/navigation';
 
@@ -12,6 +12,7 @@ export default function UploadProductForm() {
 		name: "",
     		category: "",
     		price: "",
+		discount: "",
     		description: "",
     		features: "",
     		stock: "",
@@ -22,6 +23,7 @@ export default function UploadProductForm() {
 	const [globalError, setGlobalError] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
 	const router = useRouter();
+
 
   	const  handleNext = (e) => {
     		e.preventDefault();
@@ -41,11 +43,24 @@ export default function UploadProductForm() {
   	const handleImageChange = (e) => {
 		if (!e.target.files) return;
 
+		const files = Array.from(e.target.files);
+
 		setFormData(prev => ({
 			...prev,
-		  	images: Array.from(e.target.files)
+		  	images: [...prev.images, ...files]
 	  	}));
   	};
+
+	const FIELD_STEP_MAP = {
+		name: 1,
+  		category: 1,
+  		price: 1,
+		discount: 1,
+  		description: 2,
+  		features: 2,
+  		stock: 2,
+  		images: 3,
+	};
 
   	const handleSubmit = async (e) => {
 
@@ -55,10 +70,11 @@ export default function UploadProductForm() {
 		setGlobalError(null);
 		setSuccessMessage(null);
 
-		const payload = new FormData;
+		const payload = new FormData();
 		payload.append("name", formData.name);
     		payload.append("category", formData.category);
     		payload.append("price", formData.price);
+		payload.append("discount", formData.discount);
     		payload.append("description", formData.description);
     		payload.append("features", formData.features);
     		payload.append("stock", formData.stock);
@@ -68,11 +84,13 @@ export default function UploadProductForm() {
 		try { 
 			const csrfRes = await fetch('/api/get_csrf_token', { method: 'GET' });
 			const { csrf_token } = await csrfRes.json();
-			payload.append("csrf_token", csrf_token);
 
 			const response = await fetch('/api/upload_product', {
 				method: 'POST',
 				credentials: 'include',
+				headers: {
+    					"X-CSRF-TOKEN": csrf_token
+				},
 				body: payload
 			});
 
@@ -85,7 +103,19 @@ export default function UploadProductForm() {
 						return acc;
 					}, {});
 
-					setFormErrors(formatted_errors);
+
+                                        setFormErrors(formatted_errors);
+
+					 // Determine the earliest step that has an error
+  					let targetStep = step; // start with current step
+  					Object.keys(data.errors).forEach((field) => {
+    						const fieldStep = FIELD_STEP_MAP[field];
+    						if (fieldStep && fieldStep < targetStep) {
+      							targetStep = fieldStep;
+    						}
+  					});
+
+					setStep(targetStep);
 
 					setTimeout(() => {
 						setFormErrors({});
@@ -183,6 +213,8 @@ export default function UploadProductForm() {
               							placeholder="Price"
               							value={formData.price}
 	     	 						onChange={handleChange}
+								min={1}
+                                                                max={1000000}
             						/>
           					</div>
 						
@@ -190,6 +222,25 @@ export default function UploadProductForm() {
                                                         <p className={styles['error-message']}>{formErrors.price}</p>
                                                 )}
 					</div>
+
+					<div className={styles.group}>
+                                                <div className={styles.inputRow}>
+                                                        <Percent className={styles.icon} />
+                                                        <input
+                                                                name="discount"
+                                                                type="number"
+                                                                placeholder="Discount"
+                                                                value={formData.discount}
+                                                                onChange={handleChange}
+								min={0}
+								max={100}
+                                                        />
+                                                </div>
+
+                                                {formErrors.discount && (
+                                                        <p className={styles['error-message']}>{formErrors.discount}</p>
+                                                )}
+                                        </div>
         			</div>
       			)}
 
@@ -227,6 +278,8 @@ export default function UploadProductForm() {
             						placeholder="Stock quantity"
             						value={formData.stock}
 	    						onChange={handleChange}
+							min={0}
+							max={1000000}
           					/>
 
 						{formErrors.stock && (

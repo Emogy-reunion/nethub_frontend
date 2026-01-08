@@ -33,9 +33,7 @@
 .group { 
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
   padding: 10px 12px;
-  border-radius: 10px;
   transition: border 0.2s;
   }
 
@@ -157,6 +155,7 @@
   	color: #b20000;
   	border: 1px solid #ffcccc;
 	padding: 10px;
+	margin: 10px;
 }
 
 .success-message {
@@ -164,4 +163,5 @@
   	color: #006600;
   	border: 1px solid #b3ffb3;
 	padding: 10px;
+	margin: 10px;
 }
