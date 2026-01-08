@@ -3,25 +3,23 @@ import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
+const BACKEND_URL = process.env.BACKEND_URL
 
 export default async function AdminLayout({ children }) {
 
 	try {
-		// forward cookies to backend
-		const cookie = cookies().toString();
-
 		let response = await fetch(`${BACKEND_URL}/api/is_logged_in`, {
 			method: 'GET',
-			headers: { cookie }
+			headers: { cookie: (await cookies()).toString() },
 			cache: 'no-store',
 		});
 
 
 		if (!response.ok) {
 			
-			const refreshRes = await fetch(`${BACKEND_URL}/api/refresh_token`, {
-				method: 'POST', 
-				headers: { cookie },
+			const refreshRes = await fetch(`${BACKEND_URL}/api/refresh`, {
+				method: 'POST',
+				headers: { cookie: (await cookies()).toString() },
 				cache: 'no-store',
 			});
 
@@ -32,7 +30,7 @@ export default async function AdminLayout({ children }) {
 
 			response = await fetch(`${BACKEND_URL}/api/is_logged_in`, {
 				method: 'GET',
-                                headers: { cookie }
+				headers: { cookie: (await cookies()).toString() },
                                 cache: 'no-store',
                 	});
 		}
