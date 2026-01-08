@@ -67,7 +67,7 @@ const AdminNavBar = () => {
         </li>
 
         <li className={styles["hide-on-mobile"]}>
-          <Link href="#" className={`${styles["nav-link"]} ${isActive("#")}`}>
+          <Link href="/admin/upload" className={`${styles["nav-link"]} ${isActive("/admin/upload")}`}>
             Post
           </Link>
         </li>
@@ -118,7 +118,7 @@ const AdminNavBar = () => {
         </li>
 
         <li>
-          <Link href="#" className={`${styles['nav-link']} ${isActive('/guest/login')}`}>Post</Link>
+          <Link href="/admin/upload" className={`${styles['nav-link']} ${isActive('/admin/upload')}`}>Post</Link>
         </li>
 
         <li>
