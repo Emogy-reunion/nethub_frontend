@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 
+const BACKEND_URL = process.env.BACKEND_URL
 
 export default async function AdminLayout({ children }) {
 
