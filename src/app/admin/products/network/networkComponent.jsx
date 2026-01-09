@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { MoreVertical, Trash2, Edit, DollarSign } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 import styles from "@/styles/products/networkComponent.module.css";
+import AdminNavBar from '@/components/AdminNavbar';
+import AdminFooter from "@/components/AdminFooter";
 
 export default function NetworkComponent({ data }) {
 	const [products, setProducts] = useState(data.products || []);
@@ -44,6 +48,8 @@ export default function NetworkComponent({ data }) {
   		};
 
   		return (
+			<>
+			<AdminNavBar />
     			<div className={styles.container}>
 
 				<h1 className={styles.header}>Networking Devices</h1>
@@ -52,35 +58,74 @@ export default function NetworkComponent({ data }) {
           					<p>No products available</p>
         				) : (
           					products.map((product) => (
-            						<div key={product.id} className={styles.card}>
+            						<div key={product.product_id} className={styles.card}>
               							<div className={styles.cardImage}>
-                							<img src={product.images?.[0] || "/placeholder.webp"} alt={product.name} />
-              							</div>
-              							
-								<div className={styles.cardBody}>
-                							<h3 className={styles.cardTitle}>{product.name}</h3>
-                							<p className={styles.price}>
-                								<DollarSign size={14} /> {product.price}
-              								</p>
-              							</div>
-              						<div className={styles.actions}>
-                						<MoreVertical className={styles.icon} />
-                						<div className={styles.dropdown}>
-                  							<button onClick={() => handleDelete(product.id)} className={styles.dropdownItem}>
-                    								<Trash2 className={styles.dropdownIcon} /> Delete
-                  							</button>
-                  							
-									<button className={styles.dropdownItem}>
-                    								<Edit className={styles.dropdownIcon} /> Update
-                  							</button>
-                						</div>
-              						</div>
-            					</div>
-          				))
-        			)}
-      			</div>
+        								<Link href='#' className={styles.imageLink}>
+          									<Image
+           	 									src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
+            										alt={product.name}
+            										width={400}
+            										height={180}
+            										className={styles.image}
+            										style={{ objectFit: "cover" }}
+          									/>
+          									<span className={styles.viewDetails}>View Details</span>
+        								</Link>
 
-      			{/* Pagination */}
+        								{product.discount > 0 && (
+          									<span className={styles.discountBadge}>{product.discount}% OFF</span>
+        								)}
+
+        								{product.stock === 0 && (
+          									<span className={styles.outOfStockBadge}>Out of Stock</span>
+        								)}
+      								</div>
+
+      								{/* Card body */}
+      								<div className={styles.cardBody}>
+        								<Link href='#' className={styles.cardTitle}>
+          									{product.name}
+        								</Link>
+
+      	 								 <div className={styles.priceRow}>
+          									<p className={styles.price}>
+            										<DollarSign size={14} />
+            										{product.discount > 0 ? (
+              											<>
+                											<span className={styles.originalPrice}>{product.price}</span>{" "}
+                											<span className={styles.finalPrice}>{product.final_price}</span>
+              											</>
+            										) : (
+              											<span className={styles.finalPrice}>{product.price}</span>
+            										)}
+          									</p>
+
+         	 								{product.discount > 0 && (
+            										<span className={styles.discountRight}>Save {product.discount}%</span>
+          									)}
+        								</div>
+      								</div>
+
+
+
+           	   						<div className={styles.actions}>
+                							<MoreVertical className={styles.icon} />
+                							<div className={styles.dropdown}>
+                  								<button onClick={() => handleDelete(product.id)} className={styles.dropdownItem}>
+                    									<Trash2 className={styles.dropdownIcon} /> Delete
+                  								</button>
+                  							
+										<button className={styles.dropdownItem}>
+                    									<Edit className={styles.dropdownIcon} /> Update
+                	  							</button>
+                							</div>
+              							</div>
+            						</div>
+     		     				))
+        				)}
+      				</div>
+
+	      		{/* Pagination */}
       			{pagination.pages > 1 && (
         			<div className={styles.pagination}>
           				<button disabled={!pagination.prev} onClick={() => fetchPage(pagination.prev)}>
@@ -99,5 +144,7 @@ export default function NetworkComponent({ data }) {
 
       			{loading && <p className={styles.loading}>Loading...</p>}
     		</div>
+		<AdminFooter />
+		</>
   	);
 }
