@@ -1,4 +1,5 @@
 import "./globals.css";
+
 import ClientWrapper from '@/context/ClientWrapper';
 
 export const metadata = {
@@ -50,11 +51,15 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-    return (
-        <html lang="en">
-            <body className="wrapper">
-		<ClientWrapper>{children}</ClientWrapper>
-	    </body>
-        </html>
-    );
+	return (
+		<html lang="en">
+            		<body className="wrapper">
+				<ClientWrapper>
+	    				<div className="layout">
+            					{children}
+          				</div>
+	    			</ClientWrapper>
+	    		</body>
+        	</html>
+    	);
 }

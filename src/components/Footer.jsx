@@ -19,10 +19,9 @@ const Footer = () => {
         			<div className={styles.section}>
           				<h4 className={styles.heading}>Quick Links</h4>
           				<ul className={styles.links}>
-            					<li><a href="#">Home</a></li>
-            					<li><a href="#">Products</a></li>
-	            				<li><a href="#">Networking Devices</a></li>
-        	   				<li><a href="#">Computers & Accessories</a></li>
+            					<li><a href="/">Home</a></li>
+	            				<li><a href="/guest/products/network">Networking Devices</a></li>
+        	   				<li><a href="/guest/products/accessories">Computers & Accessories</a></li>
            					<li><a href="#">Support</a></li>
           				</ul>
 	        		</div>
@@ -32,7 +31,7 @@ const Footer = () => {
           				<h4 className={styles.heading}>Contact</h4>
           				<ul className={styles.contact}>
             					<li><MapPin size={16} /> Nairobi, Kenya</li>
-            					<li><Phone size={16} /> +254 700 000000</li>
+            					<li><Phone size={16} /> +254 7</li>
             					<li><Mail size={16} /> info@nethubelectronics.com</li>
           				</ul>
         			</div>
