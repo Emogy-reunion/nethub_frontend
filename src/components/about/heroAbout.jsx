@@ -8,7 +8,7 @@ import Link from "next/link";
 const HeroAbout = () => {
 	return (
 		<header className={styles.hero}>
-      			<div className={styles.container}>
+      			<div className={styles.aboutContainer}>
         			<div className={styles.text}>
           				<h1>About Nethub Electronics</h1>
           					<p className={styles.lead}>
@@ -19,7 +19,7 @@ const HeroAbout = () => {
 
           					<div className={styles.ctas}>
             						<Link href="#" className={styles.primary}>Contact Us</Link>
-            						<Link href="#" className={styles.secondary}>Browse Products</Link>
+            						<Link href="/about/guest/network" className={styles.secondary}>Browse Products</Link>
           					</div>
         			</div>
 
