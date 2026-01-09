@@ -60,7 +60,7 @@ export default function NetworkComponent({ data }) {
           					products.map((product) => (
             						<div key={product.product_id} className={styles.card}>
               							<div className={styles.cardImage}>
-        								<Link href='#' className={styles.imageLink}>
+        								<Link href={`/admin/products/network/details/${product.product_id}`} className={styles.imageLink}>
           									<Image
            	 									src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
             										alt={product.name}
@@ -83,7 +83,7 @@ export default function NetworkComponent({ data }) {
 
       								{/* Card body */}
       								<div className={styles.cardBody}>
-        								<Link href='#' className={styles.cardTitle}>
+        								<Link href={`/admin/products/network/details/${product.product_id}`} className={styles.cardTitle}>
           									{product.name}
         								</Link>
 
@@ -111,7 +111,7 @@ export default function NetworkComponent({ data }) {
            	   						<div className={styles.actions}>
                 							<MoreVertical className={styles.icon} />
                 							<div className={styles.dropdown}>
-                  								<button onClick={() => handleDelete(product.id)} className={styles.dropdownItem}>
+                  								<button onClick={() => handleDelete(product.product_id)} className={styles.dropdownItem}>
                     									<Trash2 className={styles.dropdownIcon} /> Delete
                   								</button>
                   							

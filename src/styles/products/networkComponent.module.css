@@ -269,3 +269,35 @@
   border-color: purple;
 }
 
+
+.whatsappBtn {
+  width: 100%;
+  margin-top: 0.8rem;
+  padding: 0.6rem 0.8rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  background-color: #25d366; /* WhatsApp green */
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.whatsappBtn:hover {
+  background-color: #1ebe5d;
+  transform: translateY(-1px);
+}
+
+.whatsappBtn:active {
+  transform: translateY(0);
+}
+

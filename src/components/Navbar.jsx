@@ -53,12 +53,12 @@ const NavBar = () => {
             <span className={styles["travel-link"]}>Products</span>
             <ul className={styles["dropdown-menu"]}>
               <li>
-                <Link href="#" className={styles["travel-link"]}>
+                <Link href="/guest/products/network" className={styles["travel-link"]}>
                   Network Devices
                 </Link>
               </li>
               <li>
-                <Link href="#" className={styles["travel-link"]}>
+                <Link href="/guest/products/accessories" className={styles["travel-link"]}>
                   Computers & Accessories
                 </Link>
               </li>
@@ -110,11 +110,11 @@ const NavBar = () => {
         </li>
 
         <li>
-          <Link href="#" className={styles['nav-link']}>Network Devices</Link>
+          <Link href="/guest/products/network" className={styles['nav-link']}>Network Devices</Link>
         </li>
 
         <li>
-          <Link href="#" className={styles['nav-link']}>Computers & Accessories</Link>
+          <Link href="/guest/products/accessories" className={styles['nav-link']}>Computers & Accessories</Link>
         </li>
 
         <li>
