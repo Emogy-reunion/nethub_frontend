@@ -201,3 +201,32 @@
     }
 }
 
+
+.ctaWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.whatsappBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.4rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+
+  background-color: #25D366; /* WhatsApp green */
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.whatsappBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+}
+
