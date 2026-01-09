@@ -8,7 +8,7 @@ import styles from "@/styles/products/networkComponent.module.css";
 import AdminNavBar from '@/components/AdminNavbar';
 import AdminFooter from "@/components/AdminFooter";
 
-export default function NetworkComponent({ data }) {
+export default function AccessoryComponent({ data }) {
         const [products, setProducts] = useState(data.products || []);
         const [pagination, setPagination] = useState(data.pagination || {});
         const [loading, setLoading] = useState(false);
