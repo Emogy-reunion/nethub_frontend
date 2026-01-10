@@ -20,10 +20,10 @@ const AdminFooter = () => {
                                         <h4 className={styles.heading}>Quick Links</h4>
                                         <ul className={styles.links}>
                                                 <li><a href="/admin/dashboard">Home</a></li>
-                                                <li><a href="#">Post</a></li>
-                                                <li><a href="#">Networking Devices</a></li>
-                                                <li><a href="#">Computers & Accessories</a></li>
-                                                <li><a href="#">Profile</a></li>
+                                                <li><a href="/admin/upload">Post</a></li>
+                                                <li><a href="/admin/products/network">Networking Devices</a></li>
+                                                <li><a href="/admin/network/accessories">Computers & Accessories</a></li>
+          
                                         </ul>
                                 </div>
 
@@ -32,7 +32,7 @@ const AdminFooter = () => {
                                         <h4 className={styles.heading}>Contact</h4>
                                         <ul className={styles.contact}>
                                                 <li><MapPin size={16} /> Nairobi, Kenya</li>
-                                                <li><Phone size={16} /> +254 700 000000</li>
+                                                <li><Phone size={16} /> +254 720 237846</li>
                                                 <li><Mail size={16} /> info@nethubelectronics.com</li>
                                         </ul>
                                 </div>
