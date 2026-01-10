@@ -40,7 +40,7 @@ export default function NetworkComponent({ data }) {
       				const res = await fetch(`/api/delete_product/${productId}`, { method: "DELETE" });
       				if (!res.ok) throw new Error("Failed to delete");
       				
-				setProducts(products.filter((p) => p.id !== productId));
+				setProducts(products.filter((p) => p.product_id !== productId));
       				alert("Product deleted!");
     			} catch (err) {
       				alert("Delete failed. Try again.");
@@ -55,21 +55,26 @@ export default function NetworkComponent({ data }) {
 				<h1 className={styles.header}>Networking Devices</h1>
       				<div className={styles.grid}>
         				{products.length === 0 ? (
-          					<p>No products available</p>
+						<div className={styles.emptyStateContainer}>
+            						<div className={styles.emptyStateBox}>
+                						<p>No products available</p>
+            						</div>
+        					</div>
+          					
         				) : (
           					products.map((product) => (
             						<div key={product.product_id} className={styles.card}>
               							<div className={styles.cardImage}>
         								<Link href={`/admin/products/network/details/${product.product_id}`} className={styles.imageLink}>
-          									<Image
-           	 									src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
-            										alt={product.name}
-            										width={400}
-            										height={180}
-            										className={styles.image}
-            										style={{ objectFit: "cover" }}
-          									/>
-          									<span className={styles.viewDetails}>View Details</span>
+          									<div className={styles.aspectRatioBox}>
+											<Image
+      		     	 									src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
+            											alt={product.name}
+            											fill
+            											className={styles.image}
+            											style={{ objectFit: "cover" }}
+          										/>
+										</div>
         								</Link>
 
         								{product.discount > 0 && (
@@ -99,10 +104,6 @@ export default function NetworkComponent({ data }) {
               											<span className={styles.finalPrice}>{product.price}</span>
             										)}
           									</p>
-
-         	 								{product.discount > 0 && (
-            										<span className={styles.discountRight}>Save {product.discount}%</span>
-          									)}
         								</div>
       								</div>
 
