@@ -235,6 +235,34 @@
   color: white;
 }
 
+.emptyStateContainer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+}
+
+.emptyStateBox {
+  background-color: #f0f7ff;
+  border: 1.5px solid #e0eeff;
+  padding: 1.5rem 3rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.emptyStateBox p {
+  color: #3b82f6;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
 /* ================ Loading / Pagination ================ */
 .loading {
   text-align: center;

@@ -42,7 +42,11 @@ export default function GuestNetworkComponent({ data }) {
                                 <h1 className={styles.header}>Networking Devices</h1>
                                 <div className={styles.grid}>
                                         {products.length === 0 ? (
-                                                <p>No products available</p>
+                                               	<div className={styles.emptyStateContainer}>
+            						<div className={styles.emptyStateBox}>
+                						<p>No products available</p>
+            						</div>
+        					</div>
                                         ) : (
                                                 products.map((product) => (
                                                         <div key={product.product_id} className={styles.card}>
