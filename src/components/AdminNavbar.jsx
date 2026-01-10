@@ -8,7 +8,7 @@ import { Menu, X } from "lucide-react";
 import styles from "../styles/Navbar.module.css";
 
 
-const NavBar = () => {
+const AdminNavBar = () => {
   const [isHidden, setSidebar] = useState(true);
   const router = useRouter();
 
@@ -37,13 +37,13 @@ const NavBar = () => {
         </li>
 
         <li className={styles["hide-on-mobile"]}>
-          <Link href="/" className={`${styles["nav-link"]} ${isActive("/")}`}>
+          <Link href="/admin/dashboard" className={`${styles["nav-link"]} ${isActive("/admin/dashboard")}`}>
             Home
           </Link>
         </li>
 
         <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/guest/about")}`}>
+          <Link href="/admin/about" className={`${styles["nav-link"]} ${isActive("/admin/about")}`}>
             About Us
           </Link>
         </li>
@@ -53,12 +53,12 @@ const NavBar = () => {
             <span className={styles["travel-link"]}>Products</span>
             <ul className={styles["dropdown-menu"]}>
               <li>
-                <Link href="/guest/products/network" className={styles["travel-link"]}>
+                <Link href="/admin/products/network" className={styles["travel-link"]}>
                   Network Devices
                 </Link>
               </li>
               <li>
-                <Link href="/guest/products/accessories" className={styles["travel-link"]}>
+                <Link href="/admin/products/accessories" className={styles["travel-link"]}>
                   Computers & Accessories
                 </Link>
               </li>
@@ -67,66 +67,57 @@ const NavBar = () => {
         </li>
 
         <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/login" className={`${styles["nav-link"]} ${isActive("/guest/login")}`}>
-            Login
-          </Link>
-        </li>
-
-        <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/contact" className={`${styles["nav-link"]} ${isActive("/guest/contact")}`}>
-            Contact
+          <Link href="/admin/upload" className={`${styles["nav-link"]} ${isActive("/admin/upload")}`}>
+            Post
           </Link>
         </li>
 
         <li className={styles["menu-button"]}>
-	 	<button
-    			onClick={ShowSidebar}
-	  		className={styles.navIconButton}
-    			aria-label="Open menu"
-  		>
-    			<Menu size={26} strokeWidth={2} />
-  		</button>
-	</li>
+                <button
+                        onClick={ShowSidebar}
+                        className={styles.navIconButton}
+                        aria-label="Open menu"
+                >
+                        <Menu size={26} strokeWidth={2} />
+                </button>
+        </li>
       </ul>
 
       <ul className={isHidden ? styles["hide-sidebar"] : styles.sidebar}>
         <li className={styles["close-button"]}>
-  		<button
-    			onClick={HideSidebar}
-	  		className={styles.navIconButton}
-    			aria-label="Close menu"
-  		>
-    			<X size={26} strokeWidth={2} />
-  		</button>
-	</li>
+                <button
+                        onClick={HideSidebar}
+                        className={styles.navIconButton}
+                        aria-label="Close menu"
+                >
+                        <X size={26} strokeWidth={2} />
+                </button>
+        </li>
 
 
         <li>
-          <Link href="/" className={`${styles["nav-link"]} ${isActive("/")}`}>Home</Link>
+          <Link href="/admin/dashboard" className={`${styles["nav-link"]} ${isActive("/admin/dashboard")}`}>Home</Link>
         </li>
 
         <li>
-          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/guest/about")}`}>About Us</Link>
+          <Link href="/admin/about" className={`${styles["nav-link"]} ${isActive("/admin/about")}`}>About Us</Link>
         </li>
 
         <li>
-          <Link href="/guest/products/network" className={styles['nav-link']}>Network Devices</Link>
+          <Link href="/admin/products/network" className={styles['nav-link']}>Network Devices</Link>
         </li>
 
         <li>
-          <Link href="/guest/products/accessories" className={styles['nav-link']}>Computers & Accessories</Link>
+          <Link href="/admin/products/accessories" className={styles['nav-link']}>Computers & Accessories</Link>
         </li>
 
         <li>
-          <Link href="/guest/login" className={`${styles['nav-link']} ${isActive('/guest/login')}`}>Login</Link>
+          <Link href="/admin/upload" className={`${styles['nav-link']} ${isActive('/admin/upload')}`}>Post</Link>
         </li>
 
-        <li>
-          <Link href="/guest/contact" className={`${styles['nav-link']} ${isActive('/guest/contact')}`}>Contact</Link>
-        </li>
       </ul>
     </nav>
   );
 };
 
-export default NavBar;
+export default AdminNavBar;

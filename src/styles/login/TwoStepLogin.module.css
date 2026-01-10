@@ -24,7 +24,8 @@
   flex-direction: column;
   gap: 25px;
   width: 450px;
-  border: 3px solid #6a0dad;
+  border: 3px solid none;
+  background-color: #fff;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   padding: 30px;
   border-radius: 15px;
@@ -33,11 +34,17 @@
 /* Input group with icon */
 .inputGroup {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border: 1px solid #ccc;
   padding: 10px 12px;
   border-radius: 10px;
   transition: border 0.2s;
+}
+
+.inputRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
 }
 
 .inputGroup:focus-within {
@@ -119,3 +126,26 @@
     font-size: 0.95rem;
   }
 }
+
+
+.error-message {
+    	color: red;
+    	font-size: 12px;
+    	margin-top: 5px;
+}
+
+
+.error {
+  	background-color: #ffe0e0;
+  	color: #b20000;
+  	border: 1px solid #ffcccc;
+	padding: 10px;
+}
+
+.success-message {
+  	background-color: #e0ffe0;
+  	color: #006600;
+  	border: 1px solid #b3ffb3;
+	padding: 10px;
+}
+
