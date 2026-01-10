@@ -48,15 +48,15 @@ export default function GuestNetworkComponent({ data }) {
                                                         <div key={product.product_id} className={styles.card}>
                                                                 <div className={styles.cardImage}>
                                                                         <Link href={`/guest/products/details/${product.product_id}`} className={styles.imageLink}>
-                                                                                <Image
-                                                                                        src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
-                                                                                        alt={product.name}
-                                                                                        width={400}
-                                                                                        height={180}
-                                                                                        className={styles.image}
-                                                                                        style={{ objectFit: "cover" }}
-                                                                                />
-                                                                                <span className={styles.viewDetails}>View Details</span>
+										<div className={styles.aspectRatioBox}>
+                                                                                	<Image
+                                                                                        	src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
+                                                                                        	alt={product.name}
+                                                                                        	fill
+                                                                                        	className={styles.image}
+                                                                                        	style={{ objectFit: "cover" }}
+                                                                                	/>
+										</div>
                                                                         </Link>
 
                                                                         {product.discount > 0 && (
@@ -87,24 +87,7 @@ export default function GuestNetworkComponent({ data }) {
                                                                                         )}
                                                                                 </p>
 
-                                                                                {product.discount > 0 && (
-                                                                                        <span className={styles.discountRight}>Save {product.discount}%</span>
-                                                                                )}
                                                                         </div>
-
-									<button
-  										className={styles.whatsappBtn}
-  										onClick={() => {
-    											const message = `Hello Nethub %0A%0AI would like to order:%0A ${product.name}%0A Price: KES ${product.final_price || product.price}`;
-   											 window.open(
-     		 									 	`https://wa.me/254790844766?text=${message}`,
-      												"_blank"
-    											);
-  										}}
-									>
-  										<MessageCircle size={18} />
-  										<span>Order on WhatsApp</span>
-									</button>
 
                                                                 </div>
 
