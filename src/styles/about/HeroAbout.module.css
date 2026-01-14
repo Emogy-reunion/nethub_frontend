@@ -86,13 +86,34 @@
     margin: 0;
     padding: 0;
   }
+  
+  .text .lead {
+	  margin-bottom: 1rem;
+  }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .text h1 {
     font-size: 2rem;
   }
+
   .text .lead {
     font-size: 1rem;
   }
+
+  .ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .ctas a {
+    flex: 1 1 calc(50% - 0.5rem);
+    text-align: center;
+    padding: 0.5rem 1rem;
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+
 }

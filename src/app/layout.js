@@ -7,8 +7,10 @@ export const metadata = {
         default: "Nethub Electronics",
         template: "%s | Nethub Electronics",
     },
+
     description:
         "Nethub Electronics — your trusted hub for computers, networking devices, and cutting-edge tech solutions.",
+
     keywords: [
         "Nethub",
         "Electronics",
@@ -19,15 +21,30 @@ export const metadata = {
         "Laptops",
         "PC Accessories",
     ],
+
+    viewport: {
+        width: "device-width",
+        initialScale: 1,
+    },
+
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+        },
+    },
+
     openGraph: {
         title: "Nethub Electronics",
         description:
             "Shop high-quality computers, routers, and networking equipment from trusted brands — Nethub Electronics.",
-        url: "#",
+        url: "https://nethubtechnologies.co.ke/",
         siteName: "Nethub Electronics",
         images: [
             {
-                url: "/og-image.png",
+                url: "/logo.png",
                 width: 1200,
                 height: 630,
                 alt: "Nethub Electronics Open Graph Image",
@@ -42,7 +59,7 @@ export const metadata = {
         title: "Nethub Electronics",
         description:
             "Your one-stop destination for computers, networking devices, and smart tech.",
-        images: ["/og-image.png"],
+        images: ["/logo.png"],
     },
 
     icons: {
