@@ -42,4 +42,4 @@ jobs:
             git pull origin main
             npm ci
             npm run build
-            pm2 restart nethub-frontend
+            pm2 restart ecosystem.config.js:
