@@ -116,7 +116,7 @@ export default function ProductDetailsComponent({ product }) {
                             className={styles.whatsappBtn}
                             onClick={() => {
                                 const message = `Hello Nethub %0A%0AI would like to order:%0A ${product.name}%0A Price: KES ${product.final_price || product.price}`;
-                                window.open(`https://wa.me/254790844766?text=${message}`, "_blank");
+                                window.open(`https://wa.me/254720237846?text=${message}`, "_blank");
                             }}
                         >
                             <MessageCircle size={18} />
