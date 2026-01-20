@@ -58,7 +58,7 @@ export default function ProductDetailsComponent({ product }) {
                             <SwiperSlide key={idx}>
                                 <div className={styles.imageWrapper}>
                                     <Image
-                                        src={img ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/send_image/${img}` : "/placeholder.webp"}
+                                        src={img ? `/api/send_image/${img}` : "/placeholder.webp"}
                                         alt={`${product.name} image ${idx + 1}`}
                                         fill
                                         style={{ objectFit: "cover" }}
