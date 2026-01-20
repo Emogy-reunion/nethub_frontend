@@ -1,0 +1,174 @@
+.navList {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-link {
+  text-decoration: none;
+  height: 50px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  color: #102533;
+  background-color: transparent;
+  white-space: nowrap;
+}
+
+.nav-link:hover { font-weight: bold; }
+
+.menu-button { display: none; }
+.menu-button svg path { fill: chocolate; }
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  color: #111111;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1rem;
+  z-index: 2000;
+}
+.hide-sidebar { display: none; }
+
+.sidebar li { width: 100%; margin: 0.25rem 0; }
+
+.active-link { color: #00764d; font-weight: bold; }
+
+.hide-on-mobile { display: inline-flex; }
+
+/* Dropdown */
+.travel-link {
+  color: black;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.travel-link:hover { color: #00764d; }
+
+.travel-dropdown { position: relative; }
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-radius: 6px;
+  min-width: 220px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  z-index: 100;
+}
+.travel-dropdown:hover .dropdown-menu { display: block; }
+
+.dropdown-menu li .travel-link {
+  color: #111;
+  padding: 10px 15px;
+}
+.dropdown-menu li .travel-link:hover { background-color: #f0f0f0; }
+
+/* Logo on right */
+.logo-item {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+.logoLink { 
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	text-decoration: none;
+}
+
+
+@media screen and (max-width: 900px) {
+  .menu-button { 
+  	display: inline-block;
+ }
+  .hide-on-mobile { display: none; }
+
+  /* hide logo on very small screens; change to 'inline-flex' if you want it visible */
+  .logo-item { display: inline-flex; }
+
+  .navList { justify-content: flex-end; }
+}
+
+
+.navIconButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.menu-button {
+    display: none;
+}
+
+.menu-button svg {
+    width: 26px;
+    height: 26px;
+    stroke: #102533;
+}
+
+.menu-button:hover svg {
+    stroke: #6b21a8;
+}
+
+.close-button {
+    width: 100%;
+    display: flex;
+    padding: 15px 20px;
+}
+
+.close-button svg {
+    width: 28px;
+    height: 28px;
+    stroke: #102533;
+}
+
+.close-button:hover svg {
+    stroke: #6b21a8;
+}
+
+
+@media screen and (max-width: 900px) {
+    .menu-button {
+        display: flex;
+        align-items: center;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navIconButton,
+    .close-button {
+        padding: 18px;
+    }
+}
+
+

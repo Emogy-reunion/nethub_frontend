@@ -1,0 +1,65 @@
+.values {
+  background-color: #fff;
+  padding: 4rem 2rem;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #6b21a8;
+  margin-bottom: 3rem;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  color: #6b21a8;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.valuesList li:hover .icon {
+  transform: scale(1.08);
+  transition: transform 0.2s ease;
+}
+
+
+.valuesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.valuesList li {
+  flex: 1 1 300px;
+  background-color: #f3f4f6;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.valuesList li:hover {
+  transform: translateY(-5px);
+}
+
+.valuesList li strong {
+  display: block;
+  font-size: 1.25rem;
+  color: #6b21a8;
+  margin-bottom: 0.5rem;
+}
+
+.valuesList li p {
+  font-size: 1rem;
+  color: #374151;
+}
+

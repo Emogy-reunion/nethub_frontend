@@ -1,0 +1,115 @@
+.wrapper {
+  padding: 2rem;
+  background-color: #fff;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #6b21a8;
+}
+
+.sliderWrap {
+  position: relative;
+  width: 100%;
+}
+
+.slide {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  width: 400px;
+  height: 300px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem;
+}
+
+.media {
+  width: 100%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 1rem;
+  height: 90%;
+}
+
+.mediaInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.productName {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #111827;
+  text-align: center;
+  line-height: 1.3;
+  min-height: 2.6rem;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255,255,255,0.9);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  z-index: 2;
+  transition: background-color 0.3s;
+}
+
+.arrow:hover {
+  background-color: rgba(37, 99, 235, 0.9);
+  color: #fff;
+}
+
+.prev {
+  left: -1rem;
+}
+
+.next {
+  right: -1rem;
+}
+
+
+@media (max-width: 768px) {
+	.arrow {
+		display: none !important;
+	}
+}
+
+
+@media (max-width: 1024px) {
+  .productName {
+    font-size: 1rem; /* 16px */
+    min-height: 2.4rem;
+  }
+}
+
+/* Small devices (phones) */
+@media (max-width: 640px) {
+  .productName {
+    font-size: 0.875rem; /* 14px */
+    min-height: 2.2rem;
+    }
+
+  .card {
+    width: 90%;
+    height: 280px;
+  }
+}
