@@ -85,17 +85,17 @@ export default function NetworkDetailsComponent({ product }) {
                             {hasDiscount ? (
                                 <>
                                     <span className={styles.originalPrice}>
-                                        <span className={styles.iconWrapper}><DollarSign size={16} /></span>
+                                        <span className={styles.iconWrapper}>Ksh. </span>
                                         {product.price}
                                     </span>
                                     <span className={styles.finalPrice}>
-                                        <span className={styles.iconWrapper}><DollarSign size={16} /></span>
+                                        <span className={styles.iconWrapper}>Ksh. </span>
                                         {product.final_price}
                                     </span>
                                 </>
                             ) : (
                                 <span className={styles.finalPrice}>
-                                    <span className={styles.iconWrapper}><DollarSign size={16} /></span>
+                                    <span className={styles.iconWrapper}>Ksh. </span>
                                     {product.price}
                                 </span>
                             )}
