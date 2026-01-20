@@ -58,11 +58,10 @@ export default function ProductDetailsComponent({ product }) {
                             <SwiperSlide key={idx}>
                                 <div className={styles.imageWrapper}>
                                     <Image
-                                        src={img ? `/api/send_image/${img}` : "/placeholder.webp"}
+                                        src={img ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/send_image/${img}` : "/placeholder.webp"}
                                         alt={`${product.name} image ${idx + 1}`}
                                         fill
                                         style={{ objectFit: "cover" }}
-                                        unoptimized
                                     />
                                 </div>
                             </SwiperSlide>
@@ -79,17 +78,17 @@ export default function ProductDetailsComponent({ product }) {
                             {hasDiscount ? (
                                 <>
                                     <span className={styles.originalPrice}>
-                                        <span className={styles.iconWrapper}><DollarSign size={16} /></span>
+                                        <span className={styles.iconWrapper}>Ksh </span>
                                         {product.price}
                                     </span>
                                     <span className={styles.finalPrice}>
-                                        <span className={styles.iconWrapper}><DollarSign size={16} /></span>
+                                        <span className={styles.iconWrapper}>Ksh </span>
                                         {product.final_price}
                                     </span>
                                 </>
                             ) : (
                                 <span className={styles.finalPrice}>
-                                    <span className={styles.iconWrapper}><DollarSign size={16} /></span>
+                                    <span className={styles.iconWrapper}>Ksh </span>
                                     {product.price}
                                 </span>
                             )}

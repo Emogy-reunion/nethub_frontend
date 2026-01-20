@@ -54,7 +54,7 @@ export default function GuestNetworkComponent({ data }) {
                                                                         <Link href={`/guest/products/details/${product.product_id}`} className={styles.imageLink}>
 										<div className={styles.aspectRatioBox}>
                                                                                 	<Image
-                                                                                        	src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
+                                                                                        	src={product.image ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/send_image/${product.image}` : "/placeholder.webp"}
                                                                                         	alt={product.name}
                                                                                         	fill
                                                                                         	className={styles.image}
@@ -67,9 +67,6 @@ export default function GuestNetworkComponent({ data }) {
                                                                                 <span className={styles.discountBadge}>{product.discount}% OFF</span>
                                                                         )}
 
-                                                                        {product.stock === 0 && (
-                                                                                <span className={styles.outOfStockBadge}>Out of Stock</span>
-                                                                        )}
                                                                 </div>
 
                                                                 {/* Card body */}
@@ -80,7 +77,7 @@ export default function GuestNetworkComponent({ data }) {
 
                                                                          <div className={styles.priceRow}>
                                                                                 <p className={styles.price}>
-                                                                                        <DollarSign size={14} />
+                                                                                        Ksh. 
                                                                                         {product.discount > 0 ? (
                                                                                                 <>
                                                                                                         <span className={styles.originalPrice}>{product.price}</span>{" "}
