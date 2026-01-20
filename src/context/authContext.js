@@ -35,6 +35,29 @@ export function AuthProvider({children}) {
 		fetchUser();
 	}, [])
 
+
+	useEffect(() => {
+		const interval = setInterval(async () => {
+
+			try {
+                		const response = await fetch('/api/refresh', {
+                    			method: 'POST',
+                    			credentials: 'include'
+                		});
+
+                		if (!response.ok) {
+                    			setUser(null);
+                    			router.push('/guest/login');
+                		}
+            		} catch {
+                		setUser(null);
+                		router.push('/guest/login');
+            		}
+        	}, 10 * 60 * 1000);
+
+		return () => clearInterval(interval);
+	}, []);
+
 	const logout = async () => {
 		const response = await fetch('/api/logout', {
 			method: 'POST',

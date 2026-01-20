@@ -260,7 +260,7 @@ export default function UploadProductForm() {
 					<div className={styles.group}>
           					<textarea
             						name="features"
-            						placeholder="Key features (comma separated)"
+            						placeholder="Enter key features, one per line"
             						value={formData.features}
 	    						onChange={handleChange}
           					/>

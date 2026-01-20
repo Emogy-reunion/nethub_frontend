@@ -43,7 +43,7 @@ const NavBar = () => {
         </li>
 
         <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/about")}`}>
+          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/guest/about")}`}>
             About Us
           </Link>
         </li>
@@ -73,7 +73,7 @@ const NavBar = () => {
         </li>
 
         <li className={styles["hide-on-mobile"]}>
-          <Link href="#" className={`${styles["nav-link"]} ${isActive("/contact")}`}>
+          <Link href="/guest/contact" className={`${styles["nav-link"]} ${isActive("/guest/contact")}`}>
             Contact
           </Link>
         </li>
@@ -106,7 +106,7 @@ const NavBar = () => {
         </li>
 
         <li>
-          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/about")}`}>About Us</Link>
+          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/guest/about")}`}>About Us</Link>
         </li>
 
         <li>
@@ -122,7 +122,7 @@ const NavBar = () => {
         </li>
 
         <li>
-          <Link href="#" className={`${styles['nav-link']} ${isActive('/contact')}`}>Contact</Link>
+          <Link href="/guest/contact" className={`${styles['nav-link']} ${isActive('/guest/contact')}`}>Contact</Link>
         </li>
       </ul>
     </nav>

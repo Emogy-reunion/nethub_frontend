@@ -16,23 +16,7 @@ export default async function AdminLayout({ children }) {
 
 
 		if (!response.ok) {
-			
-			const refreshRes = await fetch(`${BACKEND_URL}/api/refresh`, {
-				method: 'POST',
-				headers: { cookie: (await cookies()).toString() },
-				cache: 'no-store',
-			});
-
-			if (!refreshRes.ok) {
-				redirect('/guest/login');
-			}
-
-
-			response = await fetch(`${BACKEND_URL}/api/is_logged_in`, {
-				method: 'GET',
-				headers: { cookie: (await cookies()).toString() },
-                                cache: 'no-store',
-                	});
+			redirect('/guest/login');
 		}
 
 		const data = await response.json();

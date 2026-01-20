@@ -4,6 +4,7 @@
     padding: 1rem 2rem;
     font-family: 'Inter', sans-serif;
     color: #111;
+    width: 100%;
 }
 
 /* ===== Product Title ===== */
@@ -22,6 +23,7 @@
     margin-bottom: 2rem;
     position: relative;
     width: 100%;
+    height: 300px;
     padding-bottom: 30px;
 }
 
@@ -29,21 +31,17 @@
     padding: 0.5rem;
 }
 
-.slick-slide {
-    margin: 0 !important;
-    padding: 0 !important;
-}
 .imageWrapper {
     width: 100%;
-    height: 250px;
+    aspect-ratio: 4 / 3;
+    min-height: 200px;
     border-radius: 12px;
     overflow: hidden;
-    aspect-ratio: 4 / 3;
     box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
-    background: #f9f9f9;
+    background-color: #f3f4f6;
 }
 
 .noImages {
@@ -217,7 +215,7 @@
   border-radius: 999px;
   border: none;
   cursor: pointer;
-
+  visibility: visible !important;
   background-color: #25D366; /* WhatsApp green */
   color: white;
   font-size: 0.95rem;

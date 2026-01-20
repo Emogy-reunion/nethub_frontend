@@ -42,30 +42,31 @@ export default function GuestNetworkComponent({ data }) {
                                 <h1 className={styles.header}>Networking Devices</h1>
                                 <div className={styles.grid}>
                                         {products.length === 0 ? (
-                                                <p>No products available</p>
+                                               	<div className={styles.emptyStateContainer}>
+            						<div className={styles.emptyStateBox}>
+                						<p>No products available</p>
+            						</div>
+        					</div>
                                         ) : (
                                                 products.map((product) => (
                                                         <div key={product.product_id} className={styles.card}>
                                                                 <div className={styles.cardImage}>
                                                                         <Link href={`/guest/products/details/${product.product_id}`} className={styles.imageLink}>
-                                                                                <Image
-                                                                                        src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
-                                                                                        alt={product.name}
-                                                                                        width={400}
-                                                                                        height={180}
-                                                                                        className={styles.image}
-                                                                                        style={{ objectFit: "cover" }}
-                                                                                />
-                                                                                <span className={styles.viewDetails}>View Details</span>
+										<div className={styles.aspectRatioBox}>
+                                                                                	<Image
+                                                                                        	src={product.image ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/send_image/${product.image}` : "/placeholder.webp"}
+                                                                                        	alt={product.name}
+                                                                                        	fill
+                                                                                        	className={styles.image}
+                                                                                        	style={{ objectFit: "cover" }}
+                                                                                	/>
+										</div>
                                                                         </Link>
 
                                                                         {product.discount > 0 && (
                                                                                 <span className={styles.discountBadge}>{product.discount}% OFF</span>
                                                                         )}
 
-                                                                        {product.stock === 0 && (
-                                                                                <span className={styles.outOfStockBadge}>Out of Stock</span>
-                                                                        )}
                                                                 </div>
 
                                                                 {/* Card body */}
@@ -76,7 +77,7 @@ export default function GuestNetworkComponent({ data }) {
 
                                                                          <div className={styles.priceRow}>
                                                                                 <p className={styles.price}>
-                                                                                        <DollarSign size={14} />
+                                                                                        Ksh. 
                                                                                         {product.discount > 0 ? (
                                                                                                 <>
                                                                                                         <span className={styles.originalPrice}>{product.price}</span>{" "}
@@ -87,24 +88,7 @@ export default function GuestNetworkComponent({ data }) {
                                                                                         )}
                                                                                 </p>
 
-                                                                                {product.discount > 0 && (
-                                                                                        <span className={styles.discountRight}>Save {product.discount}%</span>
-                                                                                )}
                                                                         </div>
-
-									<button
-  										className={styles.whatsappBtn}
-  										onClick={() => {
-    											const message = `Hello Nethub %0A%0AI would like to order:%0A ${product.name}%0A Price: KES ${product.final_price || product.price}`;
-   											 window.open(
-     		 									 	`https://wa.me/254790844766?text=${message}`,
-      												"_blank"
-    											);
-  										}}
-									>
-  										<MessageCircle size={18} />
-  										<span>Order on WhatsApp</span>
-									</button>
 
                                                                 </div>
 

@@ -1,5 +1,6 @@
 import React from "react";
-import HeroAbout from "@/components/about/heroAbout";
+import WhyChooseUs from "@/components/WhyChooseUs";
+import AboutSection from "@/components/AboutUs";
 import CTASection from "@/components/about/CTASection";
 import ValuesSection from "@/components/about/ValuesSection";
 
@@ -15,8 +16,8 @@ const GuestAboutPage = () => {
 	return (
 		<main>
 			<NavBar />
-     			<HeroAbout />
-			<ValuesSection />
+     			<AboutSection />
+			<WhyChooseUs />
 			<CTASection />
 			<Footer />
     		</main>
