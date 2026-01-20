@@ -50,6 +50,15 @@ export default function UploadProductForm() {
 	  	}));
   	};
 
+
+	const handleRemoveImage = (index) => {
+		setFormData(prev => ({
+			...prev,
+			images: prev.images.filter((_, i) => i !== index)
+		}));
+	};
+
+
 	const FIELD_STEP_MAP = {
 		name: 1,
   		category: 1,
@@ -289,6 +298,7 @@ export default function UploadProductForm() {
 
       			{/* STEP 3 */}
       			{step === 3 && (
+				<div>
         			<div className={styles.inputGroup}>
           				<label className={styles.upload}>
             					<Image />
@@ -308,6 +318,28 @@ export default function UploadProductForm() {
             					</p>
           				)}
         			</div>
+
+				<div className={styles.previewContainer}>
+					{formData.images.map((img, index) => (
+    						<div key={index} className={styles.previewWrapper}>
+      							<img
+        							src={URL.createObjectURL(img)}
+        							alt={`preview-${index}`}
+        							className={styles.previewImage}
+      							/>
+      							
+							<button
+        							type="button"
+        							className={styles.removeBtn}
+        							onClick={() => handleRemoveImage(index)}
+      							>
+        							×
+      							</button>
+    						</div>
+ 					 ))}
+				</div>
+				</div>
+
       			)}
 
       			{/* Buttons */}
