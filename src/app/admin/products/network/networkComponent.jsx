@@ -68,8 +68,12 @@ export default function NetworkComponent({ data }) {
         								<Link href={`/admin/products/network/details/${product.product_id}`} className={styles.imageLink}>
           									<div className={styles.aspectRatioBox}>
 											<Image
-      		     	 									src={product.image ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/send_image/${product.image}` : "/placeholder.webp"}
-            											alt={product.name}
+												src={product.image
+													?
+													`/api/send_image/${product.image}`
+													:
+													"/placeholder.webp"}
+							alt={product.name}
             											fill
             											className={styles.image}
             											style={{ objectFit: "cover" }}
