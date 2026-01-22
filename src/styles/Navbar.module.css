@@ -1,174 +1,238 @@
-.navList {
-  list-style: none;
+/* NAVBAR CONTAINER */
+.nav {
   display: flex;
-  flex-wrap: nowrap;
+  justify-content: space-between;
   align-items: center;
-  justify-content: flex-end;
-  gap: 0.25rem;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.nav-link {
-  text-decoration: none;
-  height: 50px;
   padding: 0 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+  height: 60px;
+}
+
+/* NAV LIST */
+.navList {
   display: flex;
   align-items: center;
-  color: #102533;
-  background-color: transparent;
-  white-space: nowrap;
-}
-
-.nav-link:hover { font-weight: bold; }
-
-.menu-button { display: none; }
-.menu-button svg path { fill: chocolate; }
-
-.sidebar {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: flex;
   width: 100%;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  color: #111111;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 1rem;
-  z-index: 2000;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
-.hide-sidebar { display: none; }
 
-.sidebar li { width: 100%; margin: 0.25rem 0; }
+/* LOGO */
+.logoItem {
+  margin-right: auto;
+}
 
-.active-link { color: #00764d; font-weight: bold; }
+/* CENTERED LINKS (PRODUCT GROUPS) */
+.centerLinks {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+  gap: 1rem;
+}
 
-.hide-on-mobile { display: inline-flex; }
+/* RIGHT LINKS (ICONS) */
+.rightLinks {
+  display: flex;
+  gap: 1rem;
+  margin-left: auto;
+}
 
-/* Dropdown */
-.travel-link {
-  color: black;
+/* DROPDOWN PARENT */
+.travelDropdown {
+  position: relative;
+}
+
+/* DROPDOWN LINK */
+.travelLink {
   text-decoration: none;
   padding: 10px 15px;
-  display: block;
+  color: #102533;
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  transition: color 0.3s ease;
+  white-space: nowrap;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
-.travel-link:hover { color: #00764d; }
 
-.travel-dropdown { position: relative; }
+.travelLink:hover {
+  color: #00764d;
+}
 
-.dropdown-menu {
+/* DROPDOWN ARROW */
+.dropdownArrow {
+  margin-left: 5px;
+  font-size: 0.6rem;
+  transition: transform 0.2s ease;
+}
+
+.travelDropdown:hover .dropdownArrow {
+  transform: rotate(180deg);
+}
+
+/* DROPDOWN MENU */
+.dropdownMenu {
   display: none;
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #fff;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+  min-width: 180px;
+  background: #fff;
   border-radius: 6px;
-  min-width: 220px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  padding: 0;
+  list-style: none;
   z-index: 100;
 }
-.travel-dropdown:hover .dropdown-menu { display: block; }
 
-.dropdown-menu li .travel-link {
-  color: #111;
-  padding: 10px 15px;
+.travelDropdown:hover .dropdownMenu {
+  display: block;
 }
-.dropdown-menu li .travel-link:hover { background-color: #f0f0f0; }
 
-/* Logo on right */
-.logo-item {
-  margin-right: auto;
+/* DROPDOWN ITEM */
+.dropdownMenu li .travelLink {
+  padding: 10px 15px;
+  display: block;
+}
+
+.dropdownMenu li .travelLink:hover {
+  background-color: #f0f0f0;
+}
+
+/* ICON LINKS (LOGIN/CONTACT) */
+.iconLink {
+  display: flex;
+  align-items: center;
+  color: #102533;
+  padding: 8px;
+}
+
+.iconLink:hover {
+  color: #00764d;
+}
+
+/* MENU BUTTON (MOBILE) */
+.menuButton {
+  display: none;
+}
+
+.navIconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
   display: flex;
   align-items: center;
 }
-.logoLink { 
-	display: inline-flex;
-	align-items: center;
-	gap: 0.5rem;
-	text-decoration: none;
+
+/* MOBILE SIDEBAR */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  background: white;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1rem;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+  z-index: 2000;
+  display: flex;
+  overflow-y: auto;
+}
+
+.closeButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.sidebar li {
+  margin-bottom: 0.5rem;
+}
+
+/* MOBILE DROPDOWN ITEMS */
+.mobileDropdown {
+  padding-left: 10px;
+}
+
+/* NAV LINK IN SIDEBAR */
+.navLink {
+  text-decoration: none;
+  color: #102533;
+  display: block;
+  padding: 10px;
+}
+
+.navLink:hover {
+  color: #00764d;
+  background-color: #f0f0f0;
 }
 
 
-@media screen and (max-width: 900px) {
-  .menu-button { 
-  	display: inline-block;
- }
-  .hide-on-mobile { display: none; }
-
-  /* hide logo on very small screens; change to 'inline-flex' if you want it visible */
-  .logo-item { display: inline-flex; }
-
-  .navList { justify-content: flex-end; }
+.mobileNavItem {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
+.mobileLinkWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
-.navIconButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0 20px;
-    height: 100%;
+.mobileArrowBtn {
+  background: none;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  color: #102533;
+  font-size: 0.8rem;
+}
+
+.rotateArrow {
+  display: inline-block;
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+.mobileDropdown {
+  padding-left: 20px;
+  background-color: #f9f9f9;
+  list-style: none;
+  width: 100%;
+}
+
+/* ACTIVE LINK */
+.active-link {
+  color: #00764d;
+  font-weight: bold;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 1100px) {
+  .menuButton {
     display: flex;
     align-items: center;
-}
+  }
 
-.menu-button {
-    display: none;
-}
-
-.menu-button svg {
-    width: 26px;
-    height: 26px;
-    stroke: #102533;
-}
-
-.menu-button:hover svg {
-    stroke: #6b21a8;
-}
-
-.close-button {
-    width: 100%;
-    display: flex;
-    padding: 15px 20px;
-}
-
-.close-button svg {
-    width: 28px;
-    height: 28px;
-    stroke: #102533;
-}
-
-.close-button:hover svg {
-    stroke: #6b21a8;
-}
-
-
-@media screen and (max-width: 900px) {
-    .menu-button {
-        display: flex;
-        align-items: center;
-    }
-
-    .hide-on-mobile {
-        display: none;
-    }
+  .centerLinks,
+  .rightLinks {
+    display: none; /* hide desktop links */
+  }
 }
 
 @media screen and (max-width: 600px) {
-    .navIconButton,
-    .close-button {
-        padding: 18px;
-    }
+  .navIconButton {
+    padding: 18px;
+  }
 }
-
 
