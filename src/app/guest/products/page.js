@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import GuestNetworkComponent from '@/app/guest/products/network/guestNetworkComponent';
+import GuestNetworkComponent from '@/app/guest/products/guestNetworkComponent';
 
 
 const BACKEND_URL = process.env.BACKEND_URL
