@@ -6,6 +6,7 @@
   padding: 0 20px;
   position: fixed;
   width: 100%;
+  max-width: 1600px;
   top: 0;
   background-color: white;
   z-index: 1000;
@@ -17,6 +18,7 @@
 .navList {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 100%;
   list-style: none;
   margin: 0;
@@ -25,22 +27,24 @@
 
 /* LOGO */
 .logoItem {
-  margin-right: auto;
+  flex: 0 0 160px;
+  margin-right: 0;
 }
 
 /* CENTERED LINKS (PRODUCT GROUPS) */
 .centerLinks {
   display: flex;
   justify-content: center;
-  flex: 1 1 auto;
-  gap: 1rem;
+  flex: 1;
+  gap: 0.5rem;
 }
 
 /* RIGHT LINKS (ICONS) */
 .rightLinks {
+  flex: 0 0 120px;
   display: flex;
   gap: 1rem;
-  margin-left: auto;
+  margin-left: 0;
 }
 
 /* DROPDOWN PARENT */
@@ -111,6 +115,7 @@
   align-items: center;
   color: #102533;
   padding: 8px;
+  min-width: 40px;
 }
 
 .iconLink:hover {
