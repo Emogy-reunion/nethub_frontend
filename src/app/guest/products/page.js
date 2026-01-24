@@ -28,7 +28,11 @@ const  GuestProductsPage = async ({ searchParams }) => {
 
                 const data = await response.json();
 
-                return <GuestNetworkComponent data={data} group={group} category={category} />;
+                return <GuestNetworkComponent
+				key={`${group}-${category}`}
+				data={data}
+				group={group} 
+				category={category} />;
         } catch(error) {
         }
 };
