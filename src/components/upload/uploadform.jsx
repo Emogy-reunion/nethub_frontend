@@ -10,6 +10,7 @@ export default function UploadProductForm() {
 
 	const [formData, setFormData] = useState({
 		name: "",
+		group: "",
     		category: "",
     		price: "",
 		discount: "",
@@ -22,6 +23,7 @@ export default function UploadProductForm() {
   	const [formErrors, setFormErrors] = useState({});
 	const [globalError, setGlobalError] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
+	const [categories, setCategories] = useState([]);
 	const router = useRouter();
 
   	const  handleNext = (e) => {
@@ -61,6 +63,7 @@ export default function UploadProductForm() {
 
 	const FIELD_STEP_MAP = {
 		name: 1,
+		group: 1,
   		category: 1,
   		price: 1,
 		discount: 1,
@@ -68,6 +71,42 @@ export default function UploadProductForm() {
   		features: 2,
   		stock: 2,
   		images: 3,
+	};
+
+	const GROUPS = [
+		{
+    			value: "networking-equipment",
+    			label: "Networking Equipment",
+    			subcategories: ["routers", "switches", "access-points", "p+d-cpe", "4g-devices"]
+  		},
+  		{
+    			value: "structured-cabling",
+    			label: "Structured Cabling",
+    			subcategories: ["cat-6-cables", "data-sockets", "network-cabinets", "pdu", "cable-manager", "patch-panels"]
+  		},
+  		{
+    			value: "audio-visual",
+    			label: "Audio and Visual",
+    			subcategories: ["hdmi-extender-converters", "hdmi-cables", "optic-and-vga-cables", "android-boxes"]
+  		},
+  		{
+    			value: "fibre-optic",
+    			label: "Fibre Optic",
+    			subcategories: ["olt", "onu", "fibre-pathcords", "media-converters", "sfp", "odf", "enclosures-fat-boxes", "fiber-cables"]
+  		},
+  		{
+    			value: "accessories-tools",
+    			label: "Accessories and Tools",
+    			subcategories: []
+  		}
+	];
+
+	const handleGroupChange = (e) => {
+		handleChange(e); // updates formData.group
+
+		const groupObj = GROUPS.find(g => g.value === e.target.value); // find the selected group
+		setCategories(groupObj?.subcategories || []);
+		setFormData(prev => ({ ...prev, category: "" }));
 	};
 
   	const handleSubmit = async (e) => {
@@ -80,6 +119,7 @@ export default function UploadProductForm() {
 
 		const payload = new FormData();
 		payload.append("name", formData.name);
+		payload.append('group', formData.group);
     		payload.append("category", formData.category);
     		payload.append("price", formData.price);
 		payload.append("discount", formData.discount);
@@ -188,28 +228,41 @@ export default function UploadProductForm() {
 						)}
 					</div>
 					
-					<div className={styles.group}>
-	  					<div className={styles.inputRow}>
-            						<Tag className={styles.icon} />
-            						<select
-              							name="category"
-              							value={formData.category}
-	      							onChange={handleChange}
-            						>
-              							<option value="">Select category</option>
-              							<option value="networking-devices">
-                							Networking Devices
-              							</option>
-              							<option value="computer-accessories">
-                							Computer Accessories
-              							</option>
-            						</select>
-          					</div>
+					 <div className={styles.group}>
+        					<div className={styles.inputRow}>
+          						<Tag className={styles.icon} />
+         	 					<select
+            							name="group"
+            							value={formData.group}
+            							onChange={handleGroupChange}
+            							required
+          						>
+            							<option value="">Select group</option>
+            							{GROUPS.map(g => (
+              								<option key={g.value} value={g.value}>{g.label}</option>
+            							))}
+          						</select>
+        					</div>
+        					{formErrors.group && <p className={styles['error-message']}>{formErrors.group}</p>}
+      					</div>
 
-						{formErrors.category && (
-                                                        <p className={styles['error-message']}>{formErrors.category}</p>
-                                                )}
-					</div>
+					<div className={styles.group}>
+        					<div className={styles.inputRow}>
+         	 					<Tag className={styles.icon} />
+          						<select
+            							name="category"
+            							value={formData.category}
+            							onChange={handleChange}
+            							disabled={categories.length === 0}
+          						>
+            							<option value="">Select category</option>
+            							{categories.map(c => (
+              								<option key={c} value={c}>{c.replace(/-/g, " ").toUpperCase()}</option>
+            							))}
+          						</select>
+        					</div>
+        					{formErrors.category && <p className={styles['error-message']}>{formErrors.category}</p>}
+      					</div>
 					
 					<div className={styles.group}>
     		      				<div className={styles.inputRow}>

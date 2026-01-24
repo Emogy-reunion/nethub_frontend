@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DollarSign, MessageCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,10 +8,15 @@ import styles from "@/styles/products/networkComponent.module.css";
 import NavBar from '@/components/Navbar';
 import Footer from "@/components/Footer";
 
-export default function GuestNetworkComponent({ data }) {
+export default function GuestNetworkComponent({ data, category, group }) {
         const [products, setProducts] = useState(data.products || []);
         const [pagination, setPagination] = useState(data.pagination || {});
         const [loading, setLoading] = useState(false);
+
+	useEffect(() => {
+		setProducts(data.products || []);
+        	setPagination(data.pagination || {});
+    	}, [data]);
 
         const fetchPage = async (page) => {
                 if (!page) return;
@@ -20,7 +25,7 @@ export default function GuestNetworkComponent({ data }) {
     
                 try {
                         const response = await fetch(
-                                `/api/get_product_previews?category=${data.products[0]?.category || "networking-devices"}&page=${page}`
+                                `/api/get_product_previews?${category ? `category=${category}&` : ""}${group ? `group=${group}&` : ""}page=${page}`
                         );
       
                         const newData = await response.json();
@@ -39,7 +44,6 @@ export default function GuestNetworkComponent({ data }) {
                         <NavBar />
                         <div className={styles.container}>
 
-                                <h1 className={styles.header}>Networking Devices</h1>
                                 <div className={styles.grid}>
                                         {products.length === 0 ? (
                                                	<div className={styles.emptyStateContainer}>

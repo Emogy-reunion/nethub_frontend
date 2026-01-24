@@ -1,130 +1,220 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, Mail } from "lucide-react"; // Icons
+import { useRouter } from "next/navigation";
 import styles from "../styles/Navbar.module.css";
 
+const productGroups = [
+  {
+    name: "Networking Equipment",
+    value: "networking-equipment",
+    categories: [
+      { name: "Routers", value: "routers" },
+      { name: "Switches", value: "switches" },
+      { name: "Access Points", value: "access-points" },
+      { name: "P+D CPE", value: "p+d-cpe" },
+      { name: "4G Devices", value: "4g-devices" },
+    ],
+  },
+  {
+    name: "Structured Cabling",
+    value: "structured-cabling",
+    categories: [
+      { name: "Cat 6 Cables", value: "cat-6-cables" },
+      { name: "Data Sockets", value: "data-sockets" },
+      { name: "Network Cabinets", value: "network-cabinets" },
+      { name: "PDU", value: "pdu" },
+      { name: "Cable Manager", value: "cable-manager" },
+      { name: "Patch Panels", value: "patch-panels" },
+    ],
+  },
+  {
+    name: "Audio & Visual",
+    value: "audio-visual",
+    categories: [
+      { name: "HDMI Extender/Converter", value: "hdmi-extender-converters" },
+      { name: "HDMI Cables", value: "hdmi-cables" },
+      { name: "Optic & VGA Cables", value: "optic-and-vga-cables" },
+      { name: "Android Boxes", value: "android-boxes" },
+    ],
+  },
+  {
+    name: "Fibre Optic",
+    value: "fibre-optic",
+    categories: [
+      { name: "OLT", value: "olt" },
+      { name: "ONU", value: "onu" },
+      { name: "Fibre Patchcords", value: "fibre-patchcords" },
+      { name: "Media Converters", value: "media-converters" },
+      { name: "SFP", value: "sfp" },
+      { name: "ODF", value: "odf" },
+      { name: "Enclosures & Fat Boxes", value: "enclosures-fat-boxes" },
+      { name: "Fiber Cables", value: "fiber-cables" },
+    ],
+  },
+  {
+    name: "Accessories & Tools",
+    value: "accessories-tools",
+    categories: [],
+  },
+];
 
 const NavBar = () => {
-  const [isHidden, setSidebar] = useState(true);
+  const [isSidebarOpen, setSidebar] = useState(false);
+  const [expandedGroup, setExpandedGroup] = useState(null);
   const router = useRouter();
 
-  const ShowSidebar = (e) => {
-    e?.preventDefault();
-    setSidebar(false);
+  const toggleSidebar = () => {
+	  setSidebar((prev) => !prev);
+	  setExpandedGroup(null);
   };
 
-  const HideSidebar = (e) => {
-    e?.preventDefault();
-    setSidebar(true);
+  const toggleGroup = (groupValue) => {
+	  setExpandedGroup(expandedGroup === groupValue ? null : groupValue);
   };
 
-  const isActive = (path) => {
-    return router.pathname === path ? styles["active-link"] : "";
-  };
+  const isActive = (path) => (router.pathname === path ? styles["active-link"] : "");
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 1024) {
+        setSidebar(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
 
   return (
     <nav className={styles.nav}>
+      {/* Desktop Navbar */}
       <ul className={styles.navList}>
-
-        <li className={styles["logo-item"]}>
+        {/* Logo */}
+        <li className={styles.logoItem}>
           <Link href="/">
-              <Image src="/logo.png" alt="Nethub Electronics" width={140} height={36} priority />
+            <Image src="/logo.png" alt="Nethub Electronics" width={140} height={36} />
           </Link>
         </li>
 
-        <li className={styles["hide-on-mobile"]}>
-          <Link href="/" className={`${styles["nav-link"]} ${isActive("/")}`}>
-            Home
-          </Link>
-        </li>
+        {/* Product Groups (centered) */}
+        <div className={styles.centerLinks}>
+          {productGroups.map((group) => (
+            <li key={group.value} className={styles.travelDropdown}>
+              <Link
+                href={`/guest/products?group=${group.value}`}
+                className={styles.travelLink}
+              >
+                {group.name} {group.categories.length > 0 && <span className={styles.dropdownArrow}>▼</span>}
+              </Link>
+              {group.categories.length > 0 && (
+                <ul className={styles.dropdownMenu}>
+                  {group.categories.map((cat) => (
+                    <li key={cat.value}>
+                      <Link
+                        href={`/guest/products?group=${group.value}&category=${cat.value}`}
+                        className={styles.travelLink}
+                      >
+                        {cat.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </div>
 
-        <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/guest/about")}`}>
-            About Us
-          </Link>
-        </li>
+        {/* Right-side icons */}
+        <div className={styles.rightLinks}>
+          <li>
+            <Link href="/guest/login" className={styles.iconLink}>
+              <User size={20} color="#102533" />
+            </Link>
+          </li>
+          <li>
+            <Link href="/guest/contact" className={styles.iconLink}>
+              <Mail size={20} color="#102533" />
+            </Link>
+          </li>
+        </div>
 
-        <li className={styles["hide-on-mobile"]}>
-          <div className={styles["travel-dropdown"]}>
-            <span className={styles["travel-link"]}>Products</span>
-            <ul className={styles["dropdown-menu"]}>
-              <li>
-                <Link href="/guest/products/network" className={styles["travel-link"]}>
-                  Network Devices
-                </Link>
-              </li>
-              <li>
-                <Link href="/guest/products/accessories" className={styles["travel-link"]}>
-                  Computers & Accessories
-                </Link>
-              </li>
-            </ul>
-          </div>
+        {/* Mobile Menu Button */}
+        <li className={styles.menuButton}>
+          <button onClick={toggleSidebar} className={styles.navIconButton} aria-label="Menu">
+            {isSidebarOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
         </li>
-
-        <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/login" className={`${styles["nav-link"]} ${isActive("/guest/login")}`}>
-            Login
-          </Link>
-        </li>
-
-        <li className={styles["hide-on-mobile"]}>
-          <Link href="/guest/contact" className={`${styles["nav-link"]} ${isActive("/guest/contact")}`}>
-            Contact
-          </Link>
-        </li>
-
-        <li className={styles["menu-button"]}>
-	 	<button
-    			onClick={ShowSidebar}
-	  		className={styles.navIconButton}
-    			aria-label="Open menu"
-  		>
-    			<Menu size={26} strokeWidth={2} />
-  		</button>
-	</li>
       </ul>
 
-      <ul className={isHidden ? styles["hide-sidebar"] : styles.sidebar}>
-        <li className={styles["close-button"]}>
-  		<button
-    			onClick={HideSidebar}
-	  		className={styles.navIconButton}
-    			aria-label="Close menu"
-  		>
-    			<X size={26} strokeWidth={2} />
-  		</button>
-	</li>
+      {/* Sidebar for mobile */}
+      {isSidebarOpen && (
+        <ul className={styles.sidebar}>
+          <li className={styles.closeButton}>
+            <button onClick={toggleSidebar} className={styles.navIconButton}>
+              <X size={26} />
+            </button>
+          </li>
+          <li>
+            <Link href="/" className={styles.navLink}>Home</Link>
+          </li>
 
+         {productGroups.map((group) => (
+  		<li key={group.value} className={styles.mobileNavItem}>
+    			<div className={styles.mobileLinkWrapper}>
+      				<Link
+       					 href={`/guest/products?group=${group.value}`}
+        				className={styles.navLink}
+        				onClick={() => setSidebar(false)}
+      				>
+        				{group.name}
+      				</Link>
+      
+      				{/* Mobile Arrow Button */}
+      				{group.categories.length > 0 && (
+        				<button 
+          					onClick={() => toggleGroup(group.value)} 
+          					className={styles.mobileArrowBtn}
+        				>
+          					<span className={expandedGroup === group.value ? styles.rotateArrow : ""}>
+         	   					▼
+          					</span>
+        				</button>
+      				)}
+    			</div>
 
-        <li>
-          <Link href="/" className={`${styles["nav-link"]} ${isActive("/")}`}>Home</Link>
-        </li>
+    			{/* Expanded Sub-menu */}
+    			{group.categories.length > 0 && expandedGroup === group.value && (
+      				<ul className={styles.mobileDropdown}>
+        				{group.categories.map((cat) => (
+          					<li key={cat.value}>
+            						<Link
+              							href={`/guest/products?group=${group.value}&category=${cat.value}`}
+              							className={styles.navLink}
+              							onClick={() => setSidebar(false)}
+            						>
+              							{cat.name}
+            						</Link>
+          					</li>
+        				))}
+      				</ul>
+    			)}
+  		</li>
+	   ))} 
 
-        <li>
-          <Link href="/guest/about" className={`${styles["nav-link"]} ${isActive("/guest/about")}`}>About Us</Link>
-        </li>
-
-        <li>
-          <Link href="/guest/products/network" className={styles['nav-link']}>Network Devices</Link>
-        </li>
-
-        <li>
-          <Link href="/guest/products/accessories" className={styles['nav-link']}>Computers & Accessories</Link>
-        </li>
-
-        <li>
-          <Link href="/guest/login" className={`${styles['nav-link']} ${isActive('/guest/login')}`}>Login</Link>
-        </li>
-
-        <li>
-          <Link href="/guest/contact" className={`${styles['nav-link']} ${isActive('/guest/contact')}`}>Contact</Link>
-        </li>
-      </ul>
+          <li>
+            <Link href="/guest/login" className={styles.navLink}>Login</Link>
+          </li>
+          <li>
+            <Link href="/guest/contact" className={styles.navLink}>Contact</Link>
+          </li>
+        </ul>
+      )}
     </nav>
   );
 };
