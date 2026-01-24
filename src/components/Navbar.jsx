@@ -15,7 +15,7 @@ const productGroups = [
       { name: "Routers", value: "routers" },
       { name: "Switches", value: "switches" },
       { name: "Access Points", value: "access-points" },
-      { name: "P+D CPE", value: "p-d-cpe" },
+      { name: "P+D CPE", value: "p+d-cpe" },
       { name: "4G Devices", value: "4g-devices" },
     ],
   },
@@ -23,7 +23,7 @@ const productGroups = [
     name: "Structured Cabling",
     value: "structured-cabling",
     categories: [
-      { name: "Cat 6 Cables", value: "cat6-cables" },
+      { name: "Cat 6 Cables", value: "cat-6-cables" },
       { name: "Data Sockets", value: "data-sockets" },
       { name: "Network Cabinets", value: "network-cabinets" },
       { name: "PDU", value: "pdu" },
@@ -35,9 +35,9 @@ const productGroups = [
     name: "Audio & Visual",
     value: "audio-visual",
     categories: [
-      { name: "HDMI Extender/Converter", value: "hdmi-extender" },
+      { name: "HDMI Extender/Converter", value: "hdmi-extender-converters" },
       { name: "HDMI Cables", value: "hdmi-cables" },
-      { name: "Optic & VGA Cables", value: "optic-vga" },
+      { name: "Optic & VGA Cables", value: "optic-and-vga-cables" },
       { name: "Android Boxes", value: "android-boxes" },
     ],
   },
@@ -51,7 +51,7 @@ const productGroups = [
       { name: "Media Converters", value: "media-converters" },
       { name: "SFP", value: "sfp" },
       { name: "ODF", value: "odf" },
-      { name: "Enclosures & Fat Boxes", value: "enclosures-fat" },
+      { name: "Enclosures & Fat Boxes", value: "enclosures-fat-boxes" },
       { name: "Fiber Cables", value: "fiber-cables" },
     ],
   },
@@ -134,12 +134,12 @@ const NavBar = () => {
         <div className={styles.rightLinks}>
           <li>
             <Link href="/guest/login" className={styles.iconLink}>
-              <User size={20} />
+              <User size={20} color="#102533" />
             </Link>
           </li>
           <li>
             <Link href="/guest/contact" className={styles.iconLink}>
-              <Mail size={20} />
+              <Mail size={20} color="#102533" />
             </Link>
           </li>
         </div>
