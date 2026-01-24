@@ -1,31 +1,37 @@
 import { cookies } from 'next/headers';
-import ProductsComponent from '@/app/admin/products/network/networkComponent';
+import NetworkComponent from '@/app/admin/products/networkComponent';
 
 
 const BACKEND_URL = process.env.BACKEND_URL
 
 
-const  AdminProductsPage = async () => {
+const  AdminNetworkPage = async ({ searchParams }) => {
 
-	try {
-		const cookie = cookies().toString();
-		
-		const response = await fetch(`${BACKEND_URL}/api/get_product_previews?category:network-devices`, {
-			method: 'GET',
-			headers: { cookie },
-			cache: 'no-store',
-		});
+	const group = (await searchParams).group || "";
+        const category = (await searchParams).category || "";
 
-		if (!response.ok) {
-			throw new Error('Fail to fetch products. Refresh page and try again!');
-		}
+        try {
 
-		const data = await response.json();
-		
-		return <ProductsComponent data={data} />;
-	} catch(error) {
-	}
+		let url = `${BACKEND_URL}/api/get_product_previews?`;
+                if (group) url += `group=${group}&`;
+                if (category) url += `category=${category}&`;
+
+                const response = await fetch(url, {
+                        method: 'GET',
+                        headers: { cookie: (await cookies()).toString() },
+                        cache: 'no-store',
+                });
+
+                if (!response.ok) {
+                        throw new Error('Fail to fetch products. Refresh page and try again!');
+                }
+
+                const data = await response.json();
+
+                return <NetworkComponent key={`${group}-${category}`} data={data} group={group} category={category} />;
+        } catch(error) {
+        }
 };
 
 
-export default AdminProductsPage;
+export default AdminNetworkPage;
