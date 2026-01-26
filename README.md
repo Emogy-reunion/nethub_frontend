@@ -53,7 +53,7 @@
 * Support iterative development for future enhancements, including full checkout and member dashboards
 
 ## Repository Structure
-``text
+```text
 /nethub-frontend
 ├── package.json           # Project metadata and dependencies
 ├── next.config.js         # Next.js configuration

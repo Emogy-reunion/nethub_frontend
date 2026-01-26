@@ -24,6 +24,7 @@ export default function UploadProductForm() {
 	const [globalError, setGlobalError] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
 	const [categories, setCategories] = useState([]);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const router = useRouter();
 
   	const  handleNext = (e) => {
@@ -112,6 +113,7 @@ export default function UploadProductForm() {
   	const handleSubmit = async (e) => {
 
 		e.preventDefault();
+		setIsSubmitting(true);
 
 		setFormErrors({});
 		setGlobalError(null);
@@ -192,6 +194,7 @@ export default function UploadProductForm() {
 			}
 		} catch {
 			alert('Network error. Please try again.');
+			setIsSubmitting(false);
 		}
 	};
 
@@ -407,7 +410,7 @@ export default function UploadProductForm() {
           				</button>
         			)}
 
-        			<button type="submit" className={styles.button}>
+        			<button type="submit" className={styles.button} disabled={isSubmitting}>
           				{step === 3 ? "Upload Product" : "Next"}
         			</button>
       			</div>
