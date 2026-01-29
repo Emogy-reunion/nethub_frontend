@@ -1,8 +1,16 @@
 import "./globals.css";
-
 import ClientWrapper from '@/context/ClientWrapper';
 
+
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
+};
+
 export const metadata = {
+
+    metadataBase: new URL("https://nethubtechnologies.co.ke"),
+
     title: {
         default: "Nethub Electronics",
         template: "%s | Nethub Electronics",
@@ -21,11 +29,6 @@ export const metadata = {
         "Laptops",
         "PC Accessories",
     ],
-
-    viewport: {
-        width: "device-width",
-        initialScale: 1,
-    },
 
     robots: {
         index: true,
