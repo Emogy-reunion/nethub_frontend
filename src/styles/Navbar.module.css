@@ -31,6 +31,12 @@
   margin-right: 0;
 }
 
+.logoWrapper {
+  position: relative;
+  width: 140px;
+  height: 40px;
+}
+
 /* CENTERED LINKS (PRODUCT GROUPS) */
 .centerLinks {
   display: flex;
