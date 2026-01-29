@@ -98,7 +98,16 @@ const NavBar = () => {
         {/* Logo */}
         <li className={styles.logoItem}>
           <Link href="/">
-            <Image src="/logo.png" alt="Nethub Electronics" width={140} height={36} />
+	  	<div className={styles.logoWrapper}>
+            		<Image 
+	 		 	src="/logo.png"
+			  	alt="Nethub Electronics"
+			  	fill
+			  	sizes="140px"
+			  	priority
+		  		style={{ objectFit: "contain" }}
+		  	/>
+	  	</div>
           </Link>
         </li>
 

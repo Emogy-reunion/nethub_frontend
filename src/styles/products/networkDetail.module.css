@@ -167,24 +167,6 @@
     color: #333;
 }
 
-/* ===== Slider Responsiveness ===== */
-@media (min-width: 1025px) {
-    .imageWrapper {
-        height: 250px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .imageWrapper {
-        height: 220px;
-    }
-}
-
-@media (max-width: 768px) {
-    .imageWrapper {
-        height: 180px;
-    }
-}
 
 @media (max-width: 480px) {
     .productTitle {

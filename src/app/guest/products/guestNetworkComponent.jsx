@@ -61,6 +61,8 @@ export default function GuestNetworkComponent({ data, category, group }) {
                                                                                         	src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
                                                                                         	alt={product.name}
                                                                                         	fill
+												sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+												loading="eager"
                                                                                         	className={styles.image}
                                                                                         	style={{ objectFit: "cover" }}
                                                                                 	/>
