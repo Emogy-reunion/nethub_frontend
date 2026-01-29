@@ -61,9 +61,9 @@ export default function NetworkDetailsComponent({ product }) {
                                         src={img ? `/api/send_image/${img}` : "/placeholder.webp"}
                                         alt={`${product.name} image ${idx + 1}`}
                                         fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                                         style={{ objectFit: "cover" }}
-                                        priority={idx === 0} // Optimization: Load the first image faster
+                                        loading={idx === 0 ? "eager" : "lazy"}
                                     />
                                 </div>
                             </SwiperSlide>

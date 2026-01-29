@@ -61,7 +61,9 @@ export default function ProductDetailsComponent({ product }) {
                                         src={img ? `/api/send_image/${img}` : "/placeholder.webp"}
                                         alt={`${product.name} image ${idx + 1}`}
                                         fill
+					sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
                                         style={{ objectFit: "cover" }}
+					loading={idx === 0 ? "eager" : "lazy"}
                                     />
                                 </div>
                             </SwiperSlide>

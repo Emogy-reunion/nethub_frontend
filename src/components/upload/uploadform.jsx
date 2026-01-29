@@ -1,29 +1,39 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Image, Package, Tag, DollarSign, Percent } from "lucide-react";
 import styles from "@/styles/upload/upload.module.css";
 import { useRouter } from 'next/navigation';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { UploadFormSchema } from "@/utils/uploadSchema.js";
+
 
 export default function UploadProductForm() {
 	const [step, setStep] = useState(1);
 
-	const [formData, setFormData] = useState({
-		name: "",
-		group: "",
-    		category: "",
-    		price: "",
-		discount: "",
-    		description: "",
-    		features: "",
-    		stock: "",
-    		images: [],
-  	});
+	const {
+		register,
+  		handleSubmit,
+  		formState: { errors, isSubmitting },
+		watch,
+		setValue,
+	} = useForm({
+  		resolver: zodResolver(UploadFormSchema),
+  		mode: "onChange",      // validate as user types
+  		reValidateMode: "onChange",
+	});
+	
+	const images = Array.from(watch("images") || []);
+
+        const selectedGroup = watch("group");
+
   
   	const [formErrors, setFormErrors] = useState({});
 	const [globalError, setGlobalError] = useState(null);
 	const [successMessage, setSuccessMessage] = useState(null);
 	const [categories, setCategories] = useState([]);
+
 	const router = useRouter();
 
   	const  handleNext = (e) => {
@@ -41,23 +51,22 @@ export default function UploadProductForm() {
 		setFormData(prev => ({...prev, [name]: value}));
   	};
   
-  	const handleImageChange = (e) => {
-		if (!e.target.files) return;
 
-		const files = Array.from(e.target.files);
+	useEffect(() => {
+  		const groupObj = GROUPS.find(g => g.value === selectedGroup);
+ 		setCategories(groupObj?.subcategories || []);
+		setValue("category", "");
+	}, [selectedGroup, setValue]);
 
-		setFormData(prev => ({
-			...prev,
-		  	images: [...prev.images, ...files]
-	  	}));
-  	};
+	const previews = useMemo(() => {
+  		return Array.from(images || []).map(img => URL.createObjectURL(img));
+	}, [images]);
 
 
 	const handleRemoveImage = (index) => {
-		setFormData(prev => ({
-			...prev,
-			images: prev.images.filter((_, i) => i !== index)
-		}));
+		 URL.revokeObjectURL(images[index]);
+
+                setValue("images", images.filter((_, i) => i !== index), { shouldValidate: true});
 	};
 
 
@@ -101,33 +110,23 @@ export default function UploadProductForm() {
   		}
 	];
 
-	const handleGroupChange = (e) => {
-		handleChange(e); // updates formData.group
-
-		const groupObj = GROUPS.find(g => g.value === e.target.value); // find the selected group
-		setCategories(groupObj?.subcategories || []);
-		setFormData(prev => ({ ...prev, category: "" }));
-	};
-
-  	const handleSubmit = async (e) => {
-
-		e.preventDefault();
+  	const onSubmit = async (data) => {
 
 		setFormErrors({});
 		setGlobalError(null);
 		setSuccessMessage(null);
 
 		const payload = new FormData();
-		payload.append("name", formData.name);
-		payload.append('group', formData.group);
-    		payload.append("category", formData.category);
-    		payload.append("price", formData.price);
-		payload.append("discount", formData.discount);
-    		payload.append("description", formData.description);
-    		payload.append("features", formData.features);
-    		payload.append("stock", formData.stock);
+		payload.append("name", data.name);
+		payload.append('group', data.group);
+    		payload.append("category", data.category);
+    		payload.append("price", data.price.toString());
+		payload.append("discount", data.discount.toString());
+    		payload.append("description", data.description);
+    		payload.append("features", data.features);
+    		payload.append("stock", data.stock.toString());
 
-    		formData.images.forEach((img) => payload.append("images", img));
+    		Array.from(data.images || []).forEach((img) => payload.append("images", img));
 
 		try { 
 			const csrfRes = await fetch('/api/get_csrf_token', { method: 'GET' });
@@ -199,7 +198,7 @@ export default function UploadProductForm() {
   	return (
     		<form
       			className={styles.form}
-      			onSubmit={step === 3 ? handleSubmit : handleNext}
+      			onSubmit={step === 3 ? handleSubmit(onSubmit) : handleNext}
     		>
       			<h2 className={styles.title}>Upload Product</h2>
 
@@ -216,15 +215,13 @@ export default function UploadProductForm() {
           					<div className={styles.inputRow}>
             						<Package className={styles.icon} />
             						<input
-              							name="name"
               							placeholder="Product name"
-              							value={formData.name}
-	      							onChange={handleChange}
+              							{...register("name")}
             						/>
           					</div>
 						
-						{formErrors.name && (
-							<p className={styles['error-message']}>{formErrors.name}</p>
+						{(errors.name || formErrors.name) && (
+							<p className={styles['error-message']}>{errors.name?.message || formErrors.name}</p>
 						)}
 					</div>
 					
@@ -232,10 +229,7 @@ export default function UploadProductForm() {
         					<div className={styles.inputRow}>
           						<Tag className={styles.icon} />
          	 					<select
-            							name="group"
-            							value={formData.group}
-            							onChange={handleGroupChange}
-            							required
+            							{...register("group")}
           						>
             							<option value="">Select group</option>
             							{GROUPS.map(g => (
@@ -243,17 +237,16 @@ export default function UploadProductForm() {
             							))}
           						</select>
         					</div>
-        					{formErrors.group && <p className={styles['error-message']}>{formErrors.group}</p>}
+        					{(errors.group || formErrors.group) && (
+							<p className={styles['error-message']}>{errors.group?.message || formErrors.group}</p>
+						)}
       					</div>
 
 					<div className={styles.group}>
         					<div className={styles.inputRow}>
          	 					<Tag className={styles.icon} />
           						<select
-            							name="category"
-            							value={formData.category}
-            							onChange={handleChange}
-            							disabled={categories.length === 0}
+            							{...register('category')}
           						>
             							<option value="">Select category</option>
             							{categories.map(c => (
@@ -261,25 +254,25 @@ export default function UploadProductForm() {
             							))}
           						</select>
         					</div>
-        					{formErrors.category && <p className={styles['error-message']}>{formErrors.category}</p>}
+        					{(errors.category || formErrors.category) && (
+							<p className={styles['error-message']}>{errors.category?.message || formErrors.category}</p>
+						)}
       					</div>
 					
 					<div className={styles.group}>
     		      				<div className={styles.inputRow}>
             						<DollarSign className={styles.icon} />
             						<input
-              							name="price"
+								{...register('price')}
               							type="number"
               							placeholder="Price"
-              							value={formData.price}
-	     	 						onChange={handleChange}
 								min={1}
                                                                 max={1000000}
             						/>
           					</div>
 						
-						{formErrors.price && (
-                                                        <p className={styles['error-message']}>{formErrors.price}</p>
+						{(errors.price || formErrors.price) && (
+                                                        <p className={styles['error-message']}>{errors.price?.message || formErrors.price}</p>
                                                 )}
 					</div>
 
@@ -287,18 +280,16 @@ export default function UploadProductForm() {
                                                 <div className={styles.inputRow}>
                                                         <Percent className={styles.icon} />
                                                         <input
-                                                                name="discount"
+                                                                {...register('discount')}
                                                                 type="number"
                                                                 placeholder="Discount"
-                                                                value={formData.discount}
-                                                                onChange={handleChange}
 								min={0}
 								max={100}
                                                         />
                                                 </div>
 
-                                                {formErrors.discount && (
-                                                        <p className={styles['error-message']}>{formErrors.discount}</p>
+                                                {(errors.discount || formErrors.discount) && (
+                                                        <p className={styles['error-message']}>{errors.discount?.message || formErrors.discount}</p>
                                                 )}
                                         </div>
         			</div>
@@ -309,41 +300,35 @@ export default function UploadProductForm() {
         			<div className={styles.inputGroup}>
 					<div className={styles.group}>
           					<textarea
-            						name="description"
+							{...register('description')}
             						placeholder="Product description"
-            						value={formData.description}
-	    						onChange={handleChange}
           					/>
-						{formErrors.description && (
-                                                        <p className={styles['error-message']}>{formErrors.description}</p>
+						{(errors.description || formErrors.description) && (
+                                                        <p className={styles['error-message']}>{errors.description?.message || formErrors.description}</p>
                                                 )}
 					</div>
 
 					<div className={styles.group}>
           					<textarea
-            						name="features"
+							{...register('features')}
             						placeholder="Enter key features, one per line"
-            						value={formData.features}
-	    						onChange={handleChange}
           					/>
-						{formErrors.features && (
-                                                        <p className={styles['error-message']}>{formErrors.features}</p>
+						{(errors.features || formErrors.features) && (
+                                                        <p className={styles['error-message']}>{errors.features?.message || formErrors.features}</p>
                                                 )}
 					</div>
 					
 					<div className={styles.group}>
           					<input
-            						name="stock"
+							{...register('stock')}
             						type="number"
             						placeholder="Stock quantity"
-            						value={formData.stock}
-	    						onChange={handleChange}
 							min={0}
 							max={1000000}
           					/>
 
-						{formErrors.stock && (
-                                                        <p className={styles['error-message']}>{formErrors.stock}</p>
+						{(errors.stock || formErrors.stock) && (
+                                                        <p className={styles['error-message']}>{errors.stock?.message || formErrors.stock}</p>
                                                 )}
 					</div>
         			</div>
@@ -361,22 +346,28 @@ export default function UploadProductForm() {
               						multiple
               						accept="image/*"
               						hidden
-	      						onChange={handleImageChange}
+	      						{...register("images")}
             					/>
           				</label>
 
-          				{formData.images.length > 0 && (
-            					<p className={styles.info}>
-              						{formData.images.length} image(s) selected
-            					</p>
-          				)}
+          				{watch("images")?.length > 0 && (
+    						<p className={styles.info}>
+      							{watch("images").length} image(s) selected
+    						</p>
+  					)}
+
+					{(errors.images || formErrors.images) && (
+    						<p className={styles["error-message"]}>
+      							{errors.images?.message || formErrors.images}
+    						</p>
+  					)}
         			</div>
 
 				<div className={styles.previewContainer}>
-					{formData.images.map((img, index) => (
+					{previews.map((url, index) => (
     						<div key={index} className={styles.previewWrapper}>
       							<img
-        							src={URL.createObjectURL(img)}
+        							src={url}
         							alt={`preview-${index}`}
         							className={styles.previewImage}
       							/>
@@ -407,7 +398,7 @@ export default function UploadProductForm() {
           				</button>
         			)}
 
-        			<button type="submit" className={styles.button}>
+        			<button type="submit" className={styles.button} disabled={isSubmitting}>
           				{step === 3 ? "Upload Product" : "Next"}
         			</button>
       			</div>

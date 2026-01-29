@@ -58,6 +58,7 @@ export default function LandingComponent({ data }) {
                                                                                                 src={product.image ? `/api/send_image/${product.image}` : "/placeholder.webp"}
                                                                                                 alt={product.name}
                                                                                                 fill
+												sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                                                                                                 className={styles.image}
                                                                                                 style={{ objectFit: "cover" }}
                                                                                         />
