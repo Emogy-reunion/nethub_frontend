@@ -14,7 +14,7 @@ import Footer from "@/components/Footer";
 import styles from "@/styles/products/networkDetail.module.css";
 
 export default function ProductDetailsComponent({ product }) {
-    const hasDiscount = product.discount && product.discount > 0;
+    const hasDiscount = Boolean(product.discount && product.discount > 0);
 
     return (
         <>
@@ -97,9 +97,13 @@ export default function ProductDetailsComponent({ product }) {
                         </p>
                     </div>
 
-                    <p className={styles.detailItem}>
-                        <Package size={16} /> Description: {product.description}
-                    </p>
+                    <div className={styles.descriptionSection}>
+    			<h3>Description</h3>
+    			<div className={styles.descriptionContent}>
+        			<Package size={16} className={styles.inlineIcon} />
+        			<span>{product.description}</span>
+    			</div>
+		     </div>
 
                     {product.features?.length > 0 && (
                         <div className={styles.features}>
