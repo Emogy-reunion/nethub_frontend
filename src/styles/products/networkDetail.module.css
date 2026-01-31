@@ -1,6 +1,6 @@
 /* ===== Container ===== */
 .container {
-    margin: 2rem auto;
+    margin: 60px auto;
     padding: 1rem 2rem;
     font-family: 'Inter', sans-serif;
     color: #111;
@@ -23,12 +23,26 @@
     margin-bottom: 2rem;
     position: relative;
     width: 100%;
-    height: 300px;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
+    overflow: visible !important;
 }
 
 .slide {
     padding: 0.5rem;
+}
+
+.sliderWrap :global(.swiper-pagination) {
+    bottom: -20px !important;
+    z-index: 10;
+}
+
+.sliderWrap :global(.swiper-pagination-bullet) {
+    background: purple !important;
+    opacity: 0.5;
+}
+
+.sliderWrap :global(.swiper-pagination-bullet-active) {
+    opacity: 1;
 }
 
 .imageWrapper {
@@ -142,6 +156,32 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 1rem;
+}
+
+.descriptionSection {
+    margin-top: 1rem;
+}
+
+.descriptionSection h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: purple;
+}
+
+.descriptionContent {
+    display: flex;
+    align-items: flex-start; /* Aligns icon with the first line of text */
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #333;
+    line-height: 1.5;
+}
+
+.inlineIcon {
+    margin-top: 3px; /* Tilts the icon slightly down to align with text height */
+    flex-shrink: 0;  /* Prevents the icon from squishing if text is long */
+    color: purple;
 }
 
 /* ===== Features List ===== */

@@ -1,8 +1,7 @@
 /* ================ Container & Grid ================ */
 .container {
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  margin-top: 60px;
+  margin: 60px auto;
+  padding: 20px;
   width: 100%;
 }
 
