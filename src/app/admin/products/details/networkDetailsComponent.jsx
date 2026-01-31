@@ -16,7 +16,7 @@ import AdminNavBar from '@/components/AdminNavbar';
 import AdminFooter from "@/components/AdminFooter";
 
 export default function NetworkDetailsComponent({ product }) {
-    const hasDiscount = product.discount && product.discount > 0;
+    const hasDiscount = Boolean(product.discount && product.discount > 0);
 
     return (
         <>
@@ -39,12 +39,10 @@ export default function NetworkDetailsComponent({ product }) {
          
                             1024: {
                                 slidesPerView: 3,
-                                navigation: { enabled: true }
                             },
                             
                             768: {
                                 slidesPerView: 2,
-                                navigation: { enabled: true }
                             },
                            
                             0: {
@@ -102,9 +100,13 @@ export default function NetworkDetailsComponent({ product }) {
                         </p>
                     </div>
 
-                    <p className={styles.detailItem}>
-                        <Package size={16} /> Description: {product.description}
-                    </p>
+                    <div className={styles.descriptionSection}>
+    			<h3>Description</h3>
+    			<div className={styles.descriptionContent}>
+        			<Package size={16} className={styles.inlineIcon} />
+        			<span>{product.description}</span>
+    			</div>
+		    </div>
 
                     {product.features?.length > 0 && (
                         <div className={styles.features}>
